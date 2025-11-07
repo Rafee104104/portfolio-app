@@ -142,7 +142,7 @@ export default function App() {
     }`;
 
   // Simple exponential backoff retry logic
-  const fetchWithRetry = async (url: string, options: RequestInit, maxRetries = 5): Promise<Response> => {
+  const fetchWithRetry = async (url: string, options: RequestInit, maxRetries = 5) => {
     let delay = 1000;
     for (let i = 0; i < maxRetries; i++) {
       try {
@@ -158,7 +158,7 @@ export default function App() {
         delay *= 2;
       }
     }
-    throw new Error('Max retries exceeded');
+    throw new Error('Failed to fetch after all retries');
   };
 
   /**
@@ -189,7 +189,6 @@ export default function App() {
         body: JSON.stringify(payload),
       });
 
-      if (!response) throw new Error('No response received');
       const result = await response.json();
       const text = result?.candidates?.[0]?.content?.parts?.[0]?.text || 'Error: Could not retrieve analysis.';
 
@@ -329,7 +328,9 @@ export default function App() {
   );
 
   const ContactSection = () => (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm mt-4">
+    // FIX: Removed sm:grid-cols-2 to force vertical stacking on all screen sizes,
+    // which prevents overlap in the narrow desktop column (lg:col-span-1).
+    <div className="grid grid-cols-1 gap-4 text-sm mt-4">
       <div className="flex items-center">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-7 13h-4a2 2 0 01-2-2V7a2 2 0 012-2h4a2 2 0 012 2v10a2 2 0 01-2 2z" /></svg>
         <span>{personalData.email}</span>
@@ -338,7 +339,8 @@ export default function App() {
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
         <span>{personalData.phone}</span>
       </div>
-      <div className="flex items-center sm:col-span-2">
+      {/* FIX: Removed sm:col-span-2 as it's now always single column */}
+      <div className="flex items-center">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
         <span>{personalData.location}</span>
       </div>
@@ -393,7 +395,7 @@ export default function App() {
 
             <div className={`${cardClasses} p-6 rounded-2xl`}>
               <Section title="Profile Summary">
-                <p className="text-gray-300 text-sm leading-relaxed">{personalData.profileSummary}</p>
+                <p className="text-gray-300 text-sm leading-relaxed">{profileText === personalData.profileSummary ? personalData.profileSummary : profileText}</p>
               </Section>
             </div>
 
