@@ -35,10 +35,10 @@ const education = [
 const skills = [
   { category: "Programming Languages", list: "C, C++, Python, Java, Javascript" },
   { category: "Web Development", list: "HTML, CSS, PHP, Javascript, Svelte.js, Node.js" },
-  { category: "Databases", list: "Oracle PL/SQL, MS SQL Server, XAMPP, SQL Lite using Prisma" },
+  { category: "Databases", list: "Oracle PL/SQL, MS SQL Server, SQL Lite using Prisma" },
   { category: "Frameworks", list: "iGraphics, ASP.Net MVC, Bootstrap" },
   { category: "Version Control", list: "Git, Github, Github Desktop" },
-  { category: "Tools", list: "Postman API, Slack, Jira" },
+  { category: "Tools", list: "Postman API, Slack, Jira, Prisma ORM" },
   { category: "Miscellaneous", list: "MS Office, MS Excel, Adobe Photoshop & Illustrator, LaTeX" },
 ];
 
