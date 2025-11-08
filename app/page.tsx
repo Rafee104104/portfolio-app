@@ -188,18 +188,6 @@ const references = [
 
 // --- REACT ICONS (for simplicity) ---
 
-const IconMenu = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
-  </svg>
-);
-
-const IconX = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-  </svg>
-);
-
 const IconGitHub = (props: React.SVGProps<SVGSVGElement>) => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" {...props}>
     <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.418 2.865 8.167 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.37-.271-3.37-.271-.454-1.156-1.11-1.46-1.11-1.46-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.829.091-.643.35-1.088.636-1.338-2.22-.253-4.555-1.119-4.555-4.949 0-1.092.39-1.983 1.029-2.687-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.577 9.577 0 0112 5.048c.852.007 1.702.112 2.502.324 1.909-1.296 2.748-1.026 2.748-1.026.546 1.379.202 2.398.099 2.65.64.704 1.028 1.595 1.028 2.687 0 3.832-2.336 4.69-4.564 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.418-.012 2.746 0 .267.18.577.688.484 3.971-1.337 6.832-5.085 6.832-9.503C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
@@ -215,18 +203,6 @@ const IconLinkedIn = (props: React.SVGProps<SVGSVGElement>) => (
 const IconMail = (props: React.SVGProps<SVGSVGElement>) => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} {...props}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-  </svg>
-);
-
-const IconSun = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} {...props}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-  </svg>
-);
-
-const IconMoon = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} {...props}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
   </svg>
 );
 
@@ -289,97 +265,12 @@ const useScrollAnimation = () => {
 };
 
 
-// --- NAVBAR COMPONENT ---
-
-const EpicNavbar = ({ darkMode, toggleDarkMode }: { darkMode: boolean, toggleDarkMode: () => void }) => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const navLinks = [
-    { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "#projects" },
-    { name: "Experience", href: "#experience" },
-    { name: "Research", href: "#research" },
-    { name: "Contact", href: "#contact" },
-  ];
-
-  return (
-    <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md sticky top-0 z-50 transition-all duration-300 shadow-sm dark:shadow-lg dark:shadow-gray-800/20">
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo/Name */}
-          <div className="flex-shrink-0">
-            <a href="#" className="text-2xl font-bold text-gray-900 dark:text-white">
-              {personalData.name}
-            </a>
-          </div>
-          
-          {/* Desktop Nav */}
-          <div className="hidden md:flex md:items-center md:space-x-2">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
-              >
-                {link.name}
-              </a>
-            ))}
-            <button
-              onClick={toggleDarkMode}
-              className="ml-4 p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-              aria-label="Toggle dark mode"
-            >
-              {darkMode ? <IconSun className="h-5 w-5" /> : <IconMoon className="h-5 w-5" />}
-            </button>
-          </div>
-          
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center">
-            <button
-              onClick={toggleDarkMode}
-              className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-              aria-label="Toggle dark mode"
-            >
-              {darkMode ? <IconSun className="h-5 w-5" /> : <IconMoon className="h-5 w-5" />}
-            </button>
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="ml-2 inline-flex items-center justify-center p-2 rounded-md text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none transition-colors"
-            >
-              <span className="sr-only">Open main menu</span>
-              {isMobileMenuOpen ? <IconX /> : <IconMenu />}
-            </button>
-          </div>
-        </div>
-      </nav>
-
-      {/* Mobile Menu */}
-      <div className={`md:hidden ${isMobileMenuOpen ? 'block' : 'hidden'} border-t border-gray-200 dark:border-gray-700`}>
-        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              onClick={() => setIsMobileMenuOpen(false)} // Close menu on click
-              className="text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium transition-colors"
-            >
-              {link.name}
-            </a>
-          ))}
-        </div>
-      </div>
-    </header>
-  );
-};
-
-
 // --- SECTION COMPONENTS ---
 
 const Section = ({ id, title, children }: { id: string, title: string, children: React.ReactNode }) => (
   <section id={id} className="py-16 md:py-24">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white text-center mb-12">
+      <h2 className="text-3xl md:text-4xl font-extrabold text-black text-center mb-12">
         {title}
       </h2>
       {children}
@@ -392,13 +283,13 @@ const HeroSection = () => {
   const { displayText: typedName, isTyping } = useTypewriter(personalData.name, 100);
 
   return (
-    <section id="hero" className="py-24 md:py-32 bg-gray-50 dark:bg-gray-800">
+    <section id="hero" className="py-24 md:py-32 bg-white/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12">
         <div className="md:w-1/3 flex justify-center">
           <img
             src={personalData.imagePath}
             alt={personalData.name}
-            className="w-48 h-48 md:w-64 md:h-64 rounded-full object-cover border-8 border-gray-200 dark:border-gray-700 shadow-2xl transition-transform duration-500 hover:scale-105"
+            className="w-48 h-48 md:w-64 md:h-64 rounded-full object-cover border-8 border-white/50 shadow-2xl transition-transform duration-500 hover:scale-105"
             onError={(e) => {
               const target = e.target as HTMLImageElement;
               target.src = "https://placehold.co/256x256/374151/E5E7EB?text=Photo"; // Fallback
@@ -407,17 +298,17 @@ const HeroSection = () => {
           />
         </div>
         <div className="md:w-2/3 text-center md:text-left">
-          <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 dark:text-white mb-4 min-h-[4rem] md:min-h-[5rem]">
+          <h1 className="text-4xl md:text-6xl font-extrabold text-black mb-4 min-h-[4rem] md:min-h-[5rem]">
             <span className={isTyping ? 'typewriter-cursor' : ''}>{typedName}</span>
           </h1>
-          <p className="text-2xl md:text-3xl text-blue-600 dark:text-blue-400 font-medium mb-8">
+          <p className="text-2xl md:text-3xl text-blue-600 font-medium mb-8">
             {personalData.title}
           </p>
           <div className="flex items-center justify-center md:justify-start space-x-6">
             <a 
               href={personalData.linkedinUrl}
               target="_blank" rel="noopener noreferrer"
-              className="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-transform duration-300 hover:scale-125"
+              className="text-slate-500 hover:text-blue-600 transition-transform duration-300 hover:scale-125"
               aria-label="LinkedIn Profile"
             >
               <IconLinkedIn className="w-8 h-8" />
@@ -425,14 +316,14 @@ const HeroSection = () => {
             <a 
               href={personalData.githubUrl}
               target="_blank" rel="noopener noreferrer"
-              className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-transform duration-300 hover:scale-125"
+              className="text-slate-500 hover:text-black transition-transform duration-300 hover:scale-125"
               aria-label="GitHub Profile"
             >
               <IconGitHub className="w-8 h-8" />
             </a>
             <a 
               href={`mailto:${personalData.email}`}
-              className="text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-500 transition-transform duration-300 hover:scale-125"
+              className="text-slate-500 hover:text-red-600 transition-transform duration-300 hover:scale-125"
               aria-label="Send Email"
             >
               <IconMail className="w-9 h-9" />
@@ -444,48 +335,50 @@ const HeroSection = () => {
   );
 };
 
+const navLinks = [
+  { name: "About", href: "#about" },
+  { name: "Skills", href: "#skills" },
+  { name: "Projects", href: "#projects" },
+  { name: "Experience", href: "#experience" },
+  { name: "Research", href: "#research" },
+  { name: "Contact", href: "#contact" },
+];
+
 
 // --- MAIN APP COMPONENT ---
 
 export default function App() {
-  const [darkMode, setDarkMode] = useState(false);
-  
-  // Custom hook to initialize theme
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      setDarkMode(true);
-      document.documentElement.classList.add('dark');
-    } else {
-      setDarkMode(false);
-      document.documentElement.classList.remove('dark');
-    }
-  }, []);
-
   // Custom hook to trigger scroll animations
   useScrollAnimation();
 
-  const toggleDarkMode = () => {
-    setDarkMode(prevMode => {
-      const newMode = !prevMode;
-      if (newMode) {
-        document.documentElement.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-        localStorage.setItem('theme', 'light');
-      }
-      return newMode;
-    });
-  };
-
-  const containerClasses = "bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200";
-  const cardClasses = "bg-gray-50 dark:bg-gray-800 shadow-lg dark:shadow-2xl dark:shadow-gray-800/50 transition-all duration-300 hover:shadow-xl dark:hover:shadow-blue-500/30 hover:scale-[1.03]";
+  const containerClasses = "bg-blue-500/10 text-black";
+  const cardClasses = "bg-white/50 shadow-lg transition-all duration-300 hover:bg-slate-100 hover:scale-[1.03]";
 
   return (
     <div className={`${containerClasses} min-h-screen font-sans transition-colors duration-500`}>
       <AnimationStyles />
-      <EpicNavbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+      <header className="bg-white/80 backdrop-blur-md sticky top-0 z-50 transition-all duration-300 shadow-sm">
+        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex-shrink-0">
+              <a href="#" className="text-2xl font-bold text-black">
+                {personalData.name}
+              </a>
+            </div>
+            <div className="flex space-x-4">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="text-slate-600 hover:bg-slate-100 hover:text-black px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                >
+                  {link.name}
+                </a>
+              ))}
+            </div>
+          </div>
+        </nav>
+      </header>
       
       <main>
         <HeroSection />
@@ -493,16 +386,16 @@ export default function App() {
         {/* About Section */}
         <Section id="about" title="About Me">
           <div className="max-w-3xl mx-auto text-center space-y-8">
-            <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed">
+            <p className="text-lg md:text-xl text-slate-700 leading-relaxed">
               {personalData.profileSummary}
             </p>
             <div>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Personal Qualities</h3>
+              <h3 className="text-2xl font-bold text-black mb-6">Personal Qualities</h3>
               <div className="flex flex-wrap justify-center gap-3">
                 {qualities.map((quality) => (
                   <span
                     key={quality}
-                    className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 text-sm font-medium px-4 py-2 rounded-full shadow-sm"
+                    className="bg-blue-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-full shadow-sm"
                   >
                     {quality}
                   </span>
@@ -517,8 +410,8 @@ export default function App() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {skills.map((skillGroup) => (
               <div key={skillGroup.category} className={`${cardClasses} p-6 rounded-2xl`}>
-                <h3 className="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-4">{skillGroup.category}</h3>
-                <p className="text-gray-700 dark:text-gray-300">{skillGroup.list}</p>
+                <h3 className="text-2xl font-bold text-blue-600 mb-4">{skillGroup.category}</h3>
+                <p className="text-black">{skillGroup.list}</p>
               </div>
             ))}
           </div>
@@ -529,9 +422,9 @@ export default function App() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((proj) => (
               <div key={proj.title} className={`${cardClasses} p-6 rounded-2xl flex flex-col`}>
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">{proj.title}</h3>
-                <p className="text-blue-600 dark:text-blue-400 text-sm mb-4 font-medium">{proj.tech}</p>
-                <p className="text-gray-700 dark:text-gray-300 mb-6 flex-grow">{proj.desc}</p>
+                <h3 className="text-2xl font-bold text-black mb-3">{proj.title}</h3>
+                <p className="text-blue-600 text-sm mb-4 font-medium">{proj.tech}</p>
+                <p className="text-black mb-6 flex-grow">{proj.desc}</p>
                 <a 
                   href={proj.link}
                   target="_blank" 
@@ -550,28 +443,28 @@ export default function App() {
         <Section id="experience" title="Professional Experience">
           <div className="max-w-3xl mx-auto space-y-8 relative">
             {/* The timeline line */}
-            <div className="absolute left-4 md:left-1/2 top-0 h-full w-0.5 bg-gray-300 dark:bg-gray-700 -translate-x-1/2"></div>
+            <div className="absolute left-4 md:left-1/2 top-0 h-full w-0.5 bg-slate-300 -translate-x-1/2"></div>
             
             {experience.map((job, index) => (
               <div key={index} className="relative pl-10 md:pl-0">
-                <div className={`absolute left-4 md:left-1/2 top-1 -translate-x-1/2 w-4 h-4 ${index === 0 ? 'bg-blue-500' : 'bg-gray-400 dark:bg-gray-600'} rounded-full border-4 border-white dark:border-gray-800`}></div>
+                <div className={`absolute left-4 md:left-1/2 top-1 -translate-x-1/2 w-4 h-4 ${index === 0 ? 'bg-blue-500' : 'bg-slate-400'} rounded-full border-4 border-white/50`}></div>
                 <div className={`md:flex ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center`}>
                   
                   {/* Card: Aligns left or right */}
-                  <div className="md:w-1/2">
+                  <div className={`md:w-[calc(50%-0.5rem)] ${index % 2 === 0 ? 'md:pr-4' : 'md:pl-4'}`}>
                     <div 
                       className={`${cardClasses} p-6 rounded-2xl initial-hidden`}
                       data-animation={index % 2 === 0 ? 'animate-slide-in-left' : 'animate-slide-in-right'}
                     >
-                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{job.title}</h3>
-                      <p className="text-lg text-blue-600 dark:text-blue-400 font-semibold">{job.company}</p>
-                      <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">{job.duration} | {job.location}</p>
-                      <p className="text-gray-700 dark:text-gray-300">{job.description}</p>
+                      <h3 className="text-2xl font-bold text-black">{job.title}</h3>
+                      <p className="text-lg text-blue-600 font-semibold">{job.company}</p>
+                      <p className="text-sm text-slate-500 mb-3">{job.duration} | {job.location}</p>
+                      <p className="text-black">{job.description}</p>
                     </div>
                   </div>
                   
                   {/* Spacer: Fills the other half on desktop */}
-                  <div className="hidden md:block md:w-1/2"></div>
+                  <div className="hidden md:block md:w-[calc(50%-0.5rem)]"></div>
 
                 </div>
               </div>
@@ -584,10 +477,10 @@ export default function App() {
           <div className="max-w-3xl mx-auto grid md:grid-cols-2 gap-8">
             {education.map((edu) => (
               <div key={edu.degree} className={`${cardClasses} p-6 rounded-2xl text-center`}>
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{edu.degree}</h3>
-                <p className="text-lg text-blue-600 dark:text-blue-400 font-semibold">{edu.institution}</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">{edu.years}</p>
-                <p className="text-gray-700 dark:text-gray-300 font-medium">{edu.result}</p>
+                <h3 className="text-2xl font-bold text-black">{edu.degree}</h3>
+                <p className="text-lg text-blue-600 font-semibold">{edu.institution}</p>
+                <p className="text-sm text-slate-500 mb-2">{edu.years}</p>
+                <p className="text-black font-medium">{edu.result}</p>
               </div>
             ))}
           </div>
@@ -598,8 +491,8 @@ export default function App() {
           <div className="max-w-3xl mx-auto">
             {research.map((pub) => (
               <div key={pub.title} className={`${cardClasses} p-6 rounded-2xl`}>
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">{pub.title}</h3>
-                <p className="text-gray-500 dark:text-gray-400 italic">{pub.authors}</p>
+                <h3 className="text-2xl font-bold text-black mb-3">{pub.title}</h3>
+                <p className="text-slate-500 italic">{pub.authors}</p>
               </div>
             ))}
           </div>
@@ -611,26 +504,26 @@ export default function App() {
             
             {/* Contact Info */}
             <div className={`${cardClasses} p-8 rounded-2xl`}>
-              <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-6 text-center">Get In Touch</h3>
+              <h3 className="text-3xl font-bold text-black mb-6 text-center">Get In Touch</h3>
               <div className="space-y-4">
-                <p className="text-lg text-gray-700 dark:text-gray-300">
-                  <span className="font-semibold text-blue-600 dark:text-blue-400">Email:</span> 
+                <p className="text-lg text-black">
+                  <span className="font-semibold text-blue-600">Email:</span> 
                   <a href={`mailto:${personalData.email}`} className="hover:underline ml-2">{personalData.email}</a>
                 </p>
-                <p className="text-lg text-gray-700 dark:text-gray-300">
-                  <span className="font-semibold text-blue-600 dark:text-blue-400">Phone:</span> 
+                <p className="text-lg text-black">
+                  <span className="font-semibold text-blue-600">Phone:</span> 
                   <a href={`tel:${personalData.phone}`} className="hover:underline ml-2">{personalData.phone}</a>
                 </p>
-                <p className="text-lg text-gray-700 dark:text-gray-300">
-                  <span className="font-semibold text-blue-600 dark:text-blue-400">Address:</span> 
+                <p className="text-lg text-black">
+                  <span className="font-semibold text-blue-600">Address:</span> 
                   <span className="ml-2">{personalData.fullAddress}</span>
                 </p>
-                <p className="text-lg text-gray-700 dark:text-gray-300">
-                  <span className="font-semibold text-blue-600 dark:text-blue-400">GitHub:</span> 
+                <p className="text-lg text-black">
+                  <span className="font-semibold text-blue-600">GitHub:</span> 
                   <a href={personalData.githubUrl} target="_blank" rel="noopener noreferrer" className="hover:underline ml-2">{personalData.githubHandle}</a>
                 </p>
-                <p className="text-lg text-gray-700 dark:text-gray-300">
-                  <span className="font-semibold text-blue-600 dark:text-blue-400">LinkedIn:</span> 
+                <p className="text-lg text-black">
+                  <span className="font-semibold text-blue-600">LinkedIn:</span> 
                   <a href={personalData.linkedinUrl} target="_blank" rel="noopener noreferrer" className="hover:underline ml-2">Tasnim Munawar Rafee</a>
                 </p>
               </div>
@@ -638,13 +531,13 @@ export default function App() {
 
             {/* References */}
             <div className={`${cardClasses} p-8 rounded-2xl`}>
-              <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-6 text-center">References</h3>
+              <h3 className="text-3xl font-bold text-black mb-6 text-center">References</h3>
               <div className="space-y-6">
                 {references.map((ref) => (
                   <div key={ref.name}>
-                    <h4 className="text-xl font-semibold text-gray-900 dark:text-white">{ref.name}</h4>
-                    <p className="text-blue-600 dark:text-blue-400">{ref.title}</p>
-                    <p className="text-gray-500 dark:text-gray-400 text-sm">{ref.contact}</p>
+                    <h4 className="text-xl font-semibold text-black">{ref.name}</h4>
+                    <p className="text-blue-600">{ref.title}</p>
+                    <p className="text-slate-500 text-sm">{ref.contact}</p>
                   </div>
                 ))}
               </div>
@@ -654,8 +547,8 @@ export default function App() {
         </Section>
       </main>
 
-      <footer className="bg-gray-100 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-500 dark:text-gray-400">
+      <footer className="bg-white/50 border-t border-slate-200 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-slate-500">
           <p>&copy; {new Date().getFullYear()} {personalData.name}. All rights reserved.</p>
         </div>
       </footer>
