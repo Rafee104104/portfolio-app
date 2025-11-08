@@ -1,8 +1,68 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
-// --- DATA EXTRACTED FROM CV ---
+// --- INJECTED STYLES ---
+// We add a <style> tag directly for animations that aren't in standard Tailwind:
+// 1. Typewriter cursor
+// 2. Slide-in-from-left animation
+// 3. Slide-in-from-right animation
+
+const AnimationStyles = () => (
+  // Use a standard <style> tag to inject global keyframes and classes.
+  // This avoids the React warning about non-boolean attributes 'jsx' and 'global'.
+  <style>{`
+    @keyframes typing-blink {
+      0%, 100% { border-color: transparent; }
+      50% { border-color: currentColor; }
+    }
+
+    .typewriter-cursor::after {
+      content: '|';
+      display: inline-block;
+      margin-left: 0.15em;
+      animation: typing-blink 1s infinite;
+    }
+
+    @keyframes slide-in-left {
+      from {
+        opacity: 0;
+        transform: translateX(-100px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slide-in-right {
+      from {
+        opacity: 0;
+        transform: translateX(100px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .animate-slide-in-left {
+      animation: slide-in-left 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+
+    .animate-slide-in-right {
+      animation: slide-in-right 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+
+    /* Target elements that are not yet visible */
+    .initial-hidden {
+      opacity: 0;
+    }
+  `}</style>
+);
+
+
+// --- DATA EXTRACTED FROM LATEST CV (20251108) ---
 
 const personalData = {
   name: "Tasnim Munawar Rafee",
@@ -12,8 +72,10 @@ const personalData = {
   phone: "+8801744127891",
   email: "tasnimmunawarrafee@gmail.com",
   githubHandle: "Rafee104104",
-  linkedinName: "Tasnim Munawar Rafee", // CV lists name, not a direct URL
-  imagePath: "/D.N.107880.jpg", // Assumes image is in public folder
+  githubUrl: "https://github.com/Rafee104104",
+  // Assumed LinkedIn URL based on name
+  linkedinUrl: "https://linkedin.com/in/tasnim-munawar-rafee",
+  imagePath: "/D.N.107880.jpg",
   profileSummary: "Dedicated novice in computer science and engineering, possessing a moderate proficiency in programming and development tools, along with a basic understanding of data science and machine learning. Competent in a variety of abilities ranging from fundamental to intermediate. Eager to learn and adapt new skills, with a recognized moderate level of critical thinking, logical reasoning and problem-solving skillset."
 };
 
@@ -35,10 +97,10 @@ const education = [
 const skills = [
   { category: "Programming Languages", list: "C, C++, Python, Java, Javascript" },
   { category: "Web Development", list: "HTML, CSS, PHP, Javascript, Svelte.js, Node.js" },
-  { category: "Databases", list: "Oracle PL/SQL, MS SQL Server, SQL Lite using Prisma" },
+  { category: "Databases", list: "Oracle PL/SQL, MS SQL Server, SQL Lite" },
   { category: "Frameworks", list: "iGraphics, ASP.Net MVC, Bootstrap" },
   { category: "Version Control", list: "Git, Github, Github Desktop" },
-  { category: "Tools", list: "Postman API, Slack, Jira, Prisma ORM" },
+  { category: "Tools", list: "Postman API, Slack, Jira, Prisma ORM" }, // Prisma ORM moved here per new CV
   { category: "Miscellaneous", list: "MS Office, MS Excel, Adobe Photoshop & Illustrator, LaTeX" },
 ];
 
@@ -69,37 +131,37 @@ const projects = [
     title: "Photopia (Instagram Clone)", 
     tech: "SvelteKit, Prisma ORM, HTML5, Tailwind CSS", 
     desc: "It's basically an Instagram clone, where people can post their picture with filters and along with some text for the post if they want.",
-    link: `https://github.com/${personalData.githubHandle}/Photopia` // Assumed link
+    link: `https://github.com/${personalData.githubHandle}/Photopia`
   },
   { 
     title: "Responsive Design Tester", 
     tech: "Svelte.js, SvelteKit, HTML5, Tailwind CSS", 
     desc: "We can test a website's responsiveness by applying various resolutions.",
-    link: `https://github.com/hannansatopay/devstar/tree/main/src/routes/(tools)/responsive-design-tester` // Assumed link
+    link: `https://github.com/hannansatopay/devstar/tree/main/src/routes/(tools)/responsive-design-tester`
   },
   { 
     title: "Quick_Notes", 
     tech: "Svelte.js, IndexedDB, Prisma ORM, Tailwind CSS", 
     desc: "It's an app to create notes for day-to-day life with an eye-catchy UI.",
-    link: `https://github.com/${personalData.githubHandle}/Quick_Notes` // Assumed link
+    link: `https://github.com/${personalData.githubHandle}/Quick_Notes`
   },
   { 
     title: "TICKETZY (Movie Ticket Management)", 
     tech: "SQL & Java", 
     desc: "A movie ticket management system enables ticket sellers to manage customer records, track available movies, and allocate seats by date and theater number.",
-    link: `https://github.com/Rafee104104/Movie-Ticket-Management-System.git` // Assumed link
+    link: `https://github.com/janakmallik/Movie-Ticket-Management-System`
   },
   { 
     title: "Run For Your Life (Pacman-like Game)", 
     tech: "C++, iGraphics Framework", 
     desc: "Run for your life is a Game like Pacman. But here you can chase the ghost.",
-    link: `https://github.com/${personalData.githubHandle}/Run-For-Your-Life` // Assumed link
+    link: `https://github.com/${personalData.githubHandle}/Run-For-Your-Life`
   },
   { 
     title: "The_Food (E-commerce)", 
     tech: "HTML, CSS, Bootstrap 4, XAMPP Server, PHP", 
     desc: "An online E-commercial website based on an online food ordering system across many restaurants.",
-    link: `https://github.com/${personalData.githubHandle}/The_Food` // Assumed link
+    link: `https://github.com/${personalData.githubHandle}/The_Food`
   },
 ];
 
@@ -107,7 +169,6 @@ const research = [
   {
     title: "A Comprehensive Study on Bengali Music Genre Classification Utilizing Ensemble Approach",
     authors: "Authors: Mohammad Tanveer Shams, Syeda Farhana Ali, et al."
-    // Add a link property here if you have one
   }
 ];
 
@@ -139,16 +200,98 @@ const IconX = () => (
   </svg>
 );
 
-const IconGitHub = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+const IconGitHub = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" {...props}>
     <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.418 2.865 8.167 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.37-.271-3.37-.271-.454-1.156-1.11-1.46-1.11-1.46-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.829.091-.643.35-1.088.636-1.338-2.22-.253-4.555-1.119-4.555-4.949 0-1.092.39-1.983 1.029-2.687-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.577 9.577 0 0112 5.048c.852.007 1.702.112 2.502.324 1.909-1.296 2.748-1.026 2.748-1.026.546 1.379.202 2.398.099 2.65.64.704 1.028 1.595 1.028 2.687 0 3.832-2.336 4.69-4.564 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.418-.012 2.746 0 .267.18.577.688.484 3.971-1.337 6.832-5.085 6.832-9.503C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
   </svg>
 );
 
+const IconLinkedIn = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" {...props}>
+    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+  </svg>
+);
+
+const IconMail = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} {...props}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+  </svg>
+);
+
+const IconSun = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} {...props}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+  </svg>
+);
+
+const IconMoon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} {...props}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+  </svg>
+);
+
+
+// --- CUSTOM HOOK: useTypewriter ---
+
+const useTypewriter = (text: string, speed: number = 100) => {
+  const [displayText, setDisplayText] = useState('');
+  const [isTyping, setIsTyping] = useState(true);
+
+  useEffect(() => {
+    if (text) {
+      setIsTyping(true);
+      setDisplayText(''); // Reset on text change
+      let i = 0;
+      const timer = setInterval(() => {
+        if (i < text.length) {
+          setDisplayText(text.substring(0, i + 1));
+          i++;
+        } else {
+          clearInterval(timer);
+          setIsTyping(false);
+        }
+      }, speed);
+
+      return () => clearInterval(timer);
+    }
+  }, [text, speed]);
+
+  return { displayText, isTyping };
+};
+
+
+// --- CUSTOM HOOK: useScrollAnimation ---
+
+const useScrollAnimation = () => {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const animationClass = entry.target.getAttribute('data-animation');
+            if (animationClass) {
+              entry.target.classList.add(animationClass);
+            }
+            observer.unobserve(entry.target); // Animate only once
+          }
+        });
+      },
+      {
+        threshold: 0.1, // Trigger when 10% of the element is visible
+      }
+    );
+
+    const targets = document.querySelectorAll('.initial-hidden');
+    targets.forEach((target) => observer.observe(target));
+
+    return () => targets.forEach((target) => observer.unobserve(target));
+  }, []);
+};
+
 
 // --- NAVBAR COMPONENT ---
 
-const EpicNavbar = () => {
+const EpicNavbar = ({ darkMode, toggleDarkMode }: { darkMode: boolean, toggleDarkMode: () => void }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navLinks = [
@@ -161,34 +304,48 @@ const EpicNavbar = () => {
   ];
 
   return (
-    <header className="bg-gray-900/80 backdrop-blur-md sticky top-0 z-50 transition-all duration-300">
+    <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md sticky top-0 z-50 transition-all duration-300 shadow-sm dark:shadow-lg dark:shadow-gray-800/20">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo/Name */}
           <div className="flex-shrink-0">
-            <a href="#" className="text-2xl font-bold text-white">
-              {personalData.name}
+            <a href="#" className="text-2xl font-bold text-gray-900 dark:text-white">
+              {personalData.name.split(' ')[0]}
             </a>
           </div>
           
           {/* Desktop Nav */}
-          <div className="hidden md:flex md:items-center md:space-x-4">
+          <div className="hidden md:flex md:items-center md:space-x-2">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                className="text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
               >
                 {link.name}
               </a>
             ))}
+            <button
+              onClick={toggleDarkMode}
+              className="ml-4 p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              aria-label="Toggle dark mode"
+            >
+              {darkMode ? <IconSun className="h-5 w-5" /> : <IconMoon className="h-5 w-5" />}
+            </button>
           </div>
           
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center">
             <button
+              onClick={toggleDarkMode}
+              className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              aria-label="Toggle dark mode"
+            >
+              {darkMode ? <IconSun className="h-5 w-5" /> : <IconMoon className="h-5 w-5" />}
+            </button>
+            <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+              className="ml-2 inline-flex items-center justify-center p-2 rounded-md text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none transition-colors"
             >
               <span className="sr-only">Open main menu</span>
               {isMobileMenuOpen ? <IconX /> : <IconMenu />}
@@ -198,14 +355,14 @@ const EpicNavbar = () => {
       </nav>
 
       {/* Mobile Menu */}
-      <div className={`md:hidden ${isMobileMenuOpen ? 'block' : 'hidden'} border-t border-gray-700`}>
+      <div className={`md:hidden ${isMobileMenuOpen ? 'block' : 'hidden'} border-t border-gray-200 dark:border-gray-700`}>
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
               onClick={() => setIsMobileMenuOpen(false)} // Close menu on click
-              className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium transition-colors"
+              className="text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium transition-colors"
             >
               {link.name}
             </a>
@@ -222,7 +379,7 @@ const EpicNavbar = () => {
 const Section = ({ id, title, children }: { id: string, title: string, children: React.ReactNode }) => (
   <section id={id} className="py-16 md:py-24">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-12">
+      <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white text-center mb-12">
         {title}
       </h2>
       {children}
@@ -230,53 +387,105 @@ const Section = ({ id, title, children }: { id: string, title: string, children:
   </section>
 );
 
-const HeroSection = () => (
-  <section id="hero" className="py-24 md:py-32 bg-gray-800">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12">
-      <div className="md:w-1/3 flex justify-center">
-        <img
-          src={personalData.imagePath}
-          alt={personalData.name}
-          className="w-48 h-48 md:w-64 md:h-64 rounded-full object-cover border-8 border-gray-700 shadow-2xl"
-          onError={(e) => {
-            const target = e.target as HTMLImageElement;
-            target.src = "https://placehold.co/256x256/374151/E5E7EB?text=Photo"; // Fallback
-            target.onerror = null;
-          }}
-        />
+const HeroSection = () => {
+  // Typewriter effect for the name
+  const { displayText: typedName, isTyping } = useTypewriter(personalData.name, 100);
+
+  return (
+    <section id="hero" className="py-24 md:py-32 bg-gray-50 dark:bg-gray-800">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12">
+        <div className="md:w-1/3 flex justify-center">
+          <img
+            src={personalData.imagePath}
+            alt={personalData.name}
+            className="w-48 h-48 md:w-64 md:h-64 rounded-full object-cover border-8 border-gray-200 dark:border-gray-700 shadow-2xl transition-transform duration-500 hover:scale-105"
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.src = "https://placehold.co/256x256/374151/E5E7EB?text=Photo"; // Fallback
+              target.onerror = null;
+            }}
+          />
+        </div>
+        <div className="md:w-2/3 text-center md:text-left">
+          <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 dark:text-white mb-4 min-h-[4rem] md:min-h-[5rem]">
+            <span className={isTyping ? 'typewriter-cursor' : ''}>{typedName}</span>
+          </h1>
+          <p className="text-2xl md:text-3xl text-blue-600 dark:text-blue-400 font-medium mb-8">
+            {personalData.title}
+          </p>
+          <div className="flex items-center justify-center md:justify-start space-x-6">
+            <a 
+              href={personalData.linkedinUrl}
+              target="_blank" rel="noopener noreferrer"
+              className="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-transform duration-300 hover:scale-125"
+              aria-label="LinkedIn Profile"
+            >
+              <IconLinkedIn className="w-8 h-8" />
+            </a>
+            <a 
+              href={personalData.githubUrl}
+              target="_blank" rel="noopener noreferrer"
+              className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-transform duration-300 hover:scale-125"
+              aria-label="GitHub Profile"
+            >
+              <IconGitHub className="w-8 h-8" />
+            </a>
+            <a 
+              href={`mailto:${personalData.email}`}
+              className="text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-500 transition-transform duration-300 hover:scale-125"
+              aria-label="Send Email"
+            >
+              <IconMail className="w-9 h-9" />
+            </a>
+          </div>
+        </div>
       </div>
-      <div className="md:w-2/3 text-center md:text-left">
-        <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-4">
-          {personalData.name}
-        </h1>
-        <p className="text-2xl md:text-3xl text-blue-300 font-medium mb-8">
-          {personalData.title}
-        </p>
-        <a 
-          href="#contact" 
-          className="inline-block bg-blue-600 text-white text-lg font-medium px-8 py-3 rounded-lg shadow-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105"
-        >
-          Get In Touch
-        </a>
-      </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 
 // --- MAIN APP COMPONENT ---
 
 export default function App() {
-  const [darkMode, setDarkMode] = useState(true); // Keep dark mode as default
+  const [darkMode, setDarkMode] = useState(false);
+  
+  // Custom hook to initialize theme
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      setDarkMode(true);
+      document.documentElement.classList.add('dark');
+    } else {
+      setDarkMode(false);
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
 
-  // This simple toggle is not used in this version, but kept for compatibility
-  // The 'epic' navbar assumes a dark theme.
-  const containerClasses = darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-800';
-  const cardClasses = darkMode ? 'bg-gray-800 shadow-xl' : 'bg-white shadow-2xl';
+  // Custom hook to trigger scroll animations
+  useScrollAnimation();
+
+  const toggleDarkMode = () => {
+    setDarkMode(prevMode => {
+      const newMode = !prevMode;
+      if (newMode) {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      }
+      return newMode;
+    });
+  };
+
+  const containerClasses = "bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200";
+  const cardClasses = "bg-gray-50 dark:bg-gray-800 shadow-lg dark:shadow-2xl dark:shadow-gray-800/50 transition-all duration-300 hover:shadow-xl dark:hover:shadow-blue-500/30 hover:scale-[1.03]";
 
   return (
     <div className={`${containerClasses} min-h-screen font-sans transition-colors duration-500`}>
-      <EpicNavbar />
+      <AnimationStyles />
+      <EpicNavbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       
       <main>
         <HeroSection />
@@ -284,16 +493,16 @@ export default function App() {
         {/* About Section */}
         <Section id="about" title="About Me">
           <div className="max-w-3xl mx-auto text-center space-y-8">
-            <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
+            <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed">
               {personalData.profileSummary}
             </p>
             <div>
-              <h3 className="text-2xl font-bold text-white mb-6">Personal Qualities</h3>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Personal Qualities</h3>
               <div className="flex flex-wrap justify-center gap-3">
                 {qualities.map((quality) => (
                   <span
                     key={quality}
-                    className="bg-blue-200 text-blue-800 text-sm font-medium px-4 py-2 rounded-full shadow-md"
+                    className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 text-sm font-medium px-4 py-2 rounded-full shadow-sm"
                   >
                     {quality}
                   </span>
@@ -308,8 +517,8 @@ export default function App() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {skills.map((skillGroup) => (
               <div key={skillGroup.category} className={`${cardClasses} p-6 rounded-2xl`}>
-                <h3 className="text-2xl font-bold text-blue-300 mb-4">{skillGroup.category}</h3>
-                <p className="text-gray-300">{skillGroup.list}</p>
+                <h3 className="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-4">{skillGroup.category}</h3>
+                <p className="text-gray-700 dark:text-gray-300">{skillGroup.list}</p>
               </div>
             ))}
           </div>
@@ -320,16 +529,16 @@ export default function App() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((proj) => (
               <div key={proj.title} className={`${cardClasses} p-6 rounded-2xl flex flex-col`}>
-                <h3 className="text-2xl font-bold text-blue-300 mb-3">{proj.title}</h3>
-                <p className="text-gray-400 text-sm mb-4 font-medium">{proj.tech}</p>
-                <p className="text-gray-300 mb-6 flex-grow">{proj.desc}</p>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">{proj.title}</h3>
+                <p className="text-blue-600 dark:text-blue-400 text-sm mb-4 font-medium">{proj.tech}</p>
+                <p className="text-gray-700 dark:text-gray-300 mb-6 flex-grow">{proj.desc}</p>
                 <a 
                   href={proj.link}
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="mt-auto inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 transition duration-150 ease-in-out"
+                  className="mt-auto inline-flex items-center justify-center gap-2 px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 transition-all duration-300 transform hover:scale-105"
                 >
-                  <IconGitHub />
+                  <IconGitHub className="w-4 h-4" />
                   View Code
                 </a>
               </div>
@@ -341,32 +550,29 @@ export default function App() {
         <Section id="experience" title="Professional Experience">
           <div className="max-w-3xl mx-auto space-y-8 relative">
             {/* The timeline line */}
-            <div className="absolute left-4 md:left-1/2 top-0 h-full w-0.5 bg-gray-700 -translate-x-1/2"></div>
+            <div className="absolute left-4 md:left-1/2 top-0 h-full w-0.5 bg-gray-300 dark:bg-gray-700 -translate-x-1/2"></div>
             
             {experience.map((job, index) => (
               <div key={index} className="relative pl-10 md:pl-0">
-                <div className="absolute left-4 md:left-1/2 top-1 -translate-x-1/2 w-4 h-4 bg-blue-500 rounded-full border-4 border-gray-800"></div>
-                <div className={`md:flex ${index % 2 === 0 ? 'md:flex-row-reverse' : ''} items-center`}>
-                  <div className="md:w-1/2 md:pr-8 text-left md:text-right">
-                    {index % 2 !== 0 && (
-                      <div className={`${cardClasses} p-6 rounded-2xl`}>
-                        <h3 className="text-2xl font-bold text-white">{job.title}</h3>
-                        <p className="text-lg text-blue-300 font-semibold">{job.company}</p>
-                        <p className="text-sm text-gray-400 mb-3">{job.duration} | {job.location}</p>
-                        <p className="text-gray-300">{job.description}</p>
-                      </div>
-                    )}
+                <div className={`absolute left-4 md:left-1/2 top-1 -translate-x-1/2 w-4 h-4 ${index === 0 ? 'bg-blue-500' : 'bg-gray-400 dark:bg-gray-600'} rounded-full border-4 border-white dark:border-gray-800`}></div>
+                <div className={`md:flex ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center`}>
+                  
+                  {/* Card: Aligns left or right */}
+                  <div className="md:w-1/2">
+                    <div 
+                      className={`${cardClasses} p-6 rounded-2xl initial-hidden`}
+                      data-animation={index % 2 === 0 ? 'animate-slide-in-left' : 'animate-slide-in-right'}
+                    >
+                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{job.title}</h3>
+                      <p className="text-lg text-blue-600 dark:text-blue-400 font-semibold">{job.company}</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">{job.duration} | {job.location}</p>
+                      <p className="text-gray-700 dark:text-gray-300">{job.description}</p>
+                    </div>
                   </div>
-                  <div className="md:w-1/2 md:pl-8 text-left">
-                    {index % 2 === 0 && (
-                       <div className={`${cardClasses} p-6 rounded-2xl`}>
-                        <h3 className="text-2xl font-bold text-white">{job.title}</h3>
-                        <p className="text-lg text-blue-300 font-semibold">{job.company}</p>
-                        <p className="text-sm text-gray-400 mb-3">{job.duration} | {job.location}</p>
-                        <p className="text-gray-300">{job.description}</p>
-                      </div>
-                    )}
-                  </div>
+                  
+                  {/* Spacer: Fills the other half on desktop */}
+                  <div className="hidden md:block md:w-1/2"></div>
+
                 </div>
               </div>
             ))}
@@ -378,10 +584,10 @@ export default function App() {
           <div className="max-w-3xl mx-auto grid md:grid-cols-2 gap-8">
             {education.map((edu) => (
               <div key={edu.degree} className={`${cardClasses} p-6 rounded-2xl text-center`}>
-                <h3 className="text-2xl font-bold text-white">{edu.degree}</h3>
-                <p className="text-lg text-blue-300 font-semibold">{edu.institution}</p>
-                <p className="text-sm text-gray-400 mb-2">{edu.years}</p>
-                <p className="text-gray-300 font-medium">{edu.result}</p>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{edu.degree}</h3>
+                <p className="text-lg text-blue-600 dark:text-blue-400 font-semibold">{edu.institution}</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">{edu.years}</p>
+                <p className="text-gray-700 dark:text-gray-300 font-medium">{edu.result}</p>
               </div>
             ))}
           </div>
@@ -392,12 +598,8 @@ export default function App() {
           <div className="max-w-3xl mx-auto">
             {research.map((pub) => (
               <div key={pub.title} className={`${cardClasses} p-6 rounded-2xl`}>
-                <h3 className="text-2xl font-bold text-white mb-3">{pub.title}</h3>
-                <p className="text-gray-400 italic">{pub.authors}</p>
-                {/* <a href="#" className="text-blue-400 hover:underline mt-4 inline-block">
-                  View Publication (Add link if available)
-                </a> 
-                */}
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">{pub.title}</h3>
+                <p className="text-gray-500 dark:text-gray-400 italic">{pub.authors}</p>
               </div>
             ))}
           </div>
@@ -409,36 +611,40 @@ export default function App() {
             
             {/* Contact Info */}
             <div className={`${cardClasses} p-8 rounded-2xl`}>
-              <h3 className="text-3xl font-bold text-white mb-6 text-center">Get In Touch</h3>
+              <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-6 text-center">Get In Touch</h3>
               <div className="space-y-4">
-                <p className="text-lg text-gray-300">
-                  <span className="font-semibold text-blue-300">Email:</span> 
+                <p className="text-lg text-gray-700 dark:text-gray-300">
+                  <span className="font-semibold text-blue-600 dark:text-blue-400">Email:</span> 
                   <a href={`mailto:${personalData.email}`} className="hover:underline ml-2">{personalData.email}</a>
                 </p>
-                <p className="text-lg text-gray-300">
-                  <span className="font-semibold text-blue-300">Phone:</span> 
+                <p className="text-lg text-gray-700 dark:text-gray-300">
+                  <span className="font-semibold text-blue-600 dark:text-blue-400">Phone:</span> 
                   <a href={`tel:${personalData.phone}`} className="hover:underline ml-2">{personalData.phone}</a>
                 </p>
-                <p className="text-lg text-gray-300">
-                  <span className="font-semibold text-blue-300">Address:</span> 
+                <p className="text-lg text-gray-700 dark:text-gray-300">
+                  <span className="font-semibold text-blue-600 dark:text-blue-400">Address:</span> 
                   <span className="ml-2">{personalData.fullAddress}</span>
                 </p>
-                <p className="text-lg text-gray-300">
-                  <span className="font-semibold text-blue-300">GitHub:</span> 
-                  <a href={`https://github.com/${personalData.githubHandle}`} target="_blank" rel="noopener noreferrer" className="hover:underline ml-2">{personalData.githubHandle}</a>
+                <p className="text-lg text-gray-700 dark:text-gray-300">
+                  <span className="font-semibold text-blue-600 dark:text-blue-400">GitHub:</span> 
+                  <a href={personalData.githubUrl} target="_blank" rel="noopener noreferrer" className="hover:underline ml-2">{personalData.githubHandle}</a>
+                </p>
+                <p className="text-lg text-gray-700 dark:text-gray-300">
+                  <span className="font-semibold text-blue-600 dark:text-blue-400">LinkedIn:</span> 
+                  <a href={personalData.linkedinUrl} target="_blank" rel="noopener noreferrer" className="hover:underline ml-2">Tasnim Munawar Rafee</a>
                 </p>
               </div>
             </div>
 
             {/* References */}
             <div className={`${cardClasses} p-8 rounded-2xl`}>
-              <h3 className="text-3xl font-bold text-white mb-6 text-center">References</h3>
+              <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-6 text-center">References</h3>
               <div className="space-y-6">
                 {references.map((ref) => (
                   <div key={ref.name}>
-                    <h4 className="text-xl font-semibold text-white">{ref.name}</h4>
-                    <p className="text-blue-300">{ref.title}</p>
-                    <p className="text-gray-400 text-sm">{ref.contact}</p>
+                    <h4 className="text-xl font-semibold text-gray-900 dark:text-white">{ref.name}</h4>
+                    <p className="text-blue-600 dark:text-blue-400">{ref.title}</p>
+                    <p className="text-gray-500 dark:text-gray-400 text-sm">{ref.contact}</p>
                   </div>
                 ))}
               </div>
@@ -448,8 +654,8 @@ export default function App() {
         </Section>
       </main>
 
-      <footer className="bg-gray-800 border-t border-gray-700 py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-500">
+      <footer className="bg-gray-100 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-500 dark:text-gray-400">
           <p>&copy; {new Date().getFullYear()} {personalData.name}. All rights reserved.</p>
         </div>
       </footer>
