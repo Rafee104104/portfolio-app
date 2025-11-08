@@ -310,7 +310,7 @@ const EpicNavbar = ({ darkMode, toggleDarkMode }: { darkMode: boolean, toggleDar
           {/* Logo/Name */}
           <div className="flex-shrink-0">
             <a href="#" className="text-2xl font-bold text-gray-900 dark:text-white">
-              {personalData.name.split(' ')[0]}
+              {personalData.name}
             </a>
           </div>
           
