@@ -194,6 +194,11 @@ const research = [
 
 const references = [
   {
+    name: "Shamsul Alam",
+    title: "Chief Executive Officer, DeshIT_BD",
+    contact: "info@deshit-bd.com | +8801537570379"
+  },
+  {
     name: "Dr. Kazi A. Kalpoma",
     title: "Professor, Ahsanullah University of Science and Technology",
     contact: "kalpoma@aust.edu | +8801819127854"
