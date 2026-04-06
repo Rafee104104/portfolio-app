@@ -63,22 +63,32 @@ const AnimationStyles = () => (
 );
 
 
-// --- DATA EXTRACTED FROM LATEST CV (20251108) ---
+// --- DATA EXTRACTED FROM LATEST CV (2026-04-06) ---
 
 const personalData = {
   name: "Tasnim Munawar Rafee",
-  title: "Software Developer | CSE Graduate",
+  title: "Full Stack Software Engineer || IT Support Executive || Backend Web Developer",
   location: "Dhaka, Bangladesh",
   fullAddress: "358/1, Khandokar Road, Shyampur, Jurain, Dhaka 1204",
   phone: "+8801744127891",
   email: "tasnimmunawarrafee@gmail.com",
   githubHandle: "Rafee104104",
   githubUrl: "https://github.com/Rafee104104",
-  // Assumed LinkedIn URL based on name
-  linkedinUrl: "https://linkedin.com/in/tasnim-munawar-rafee",
+  linkedinUrl: "https://www.linkedin.com/in/tasnim-munawar-rafee/",
+  youtubeUrl: "https://www.youtube.com/@TasnimMunawarRafee",
+  portfolioUrl: "https://portfolio-app-lac-seven.vercel.app/",
+  dateOfBirth: "28th August 2000",
+  nationality: "Bangladeshi",
+  maritalStatus: "Married",
   imagePath: "/D.N.107880.jpg",
   profileSummary: "Dedicated novice in computer science and engineering, possessing a moderate proficiency in programming and development tools, along with a basic understanding of data science and machine learning. Competent in a variety of abilities ranging from fundamental to intermediate. Eager to learn and adapt new skills, with a recognized moderate level of critical thinking, logical reasoning and problem-solving skillset."
 };
+
+const personalDetails = [
+  { label: "Date of Birth", value: personalData.dateOfBirth },
+  { label: "Nationality", value: personalData.nationality },
+  { label: "Marital Status", value: personalData.maritalStatus },
+];
 
 const education = [
   { 
@@ -92,6 +102,12 @@ const education = [
     institution: "Kabi Nazrul Govt. College", 
     years: "2017-2019", 
     result: "GPA: 4.42 / 5.00" 
+  },
+  {
+    degree: "Dakhil (Equivalent S.S.C.) in Science",
+    institution: "Tamirul Millat Kamil Madrasah",
+    years: "2015-2017",
+    result: "GPA: 5.00 / 5.00"
   },
 ];
 
@@ -109,6 +125,8 @@ const qualities = [
   "Teamwork", "Time Management", "Problem Solving", "Work Ethic", 
   "Critical Thinking", "Creativity", "Adaptability", "Logical Reasoning", "Communication"
 ];
+
+const languages = ["Bengali (Native)", "English"];
 
 type Experience = {
   title: string;
@@ -131,7 +149,7 @@ const experience: Experience[] = [
   {
     title: "IT Support Executive",
     company: "Mercy General Hospital D.Lab & Consultation Centre",
-    duration: "Aug 2024 - Present",
+    duration: "August 2024 - December 2025",
     location: "Dhaka, Bangladesh",
     description: "Worked as an IT Support Executive on the hospital's third-party software application and hardware support. Communication with patient and others for proper management of the software support.",
     side: "left"
@@ -139,7 +157,7 @@ const experience: Experience[] = [
   {
     title: "Intern Full-Stack Developer",
     company: "Hannan Satopay (Meta Craftlab)",
-    duration: "Jun 2024 - Jul 2024",
+    duration: "June 1, 2024 - July 12, 2024",
     location: "Mumbai, India",
     description: "Developed web applications using Svelte.js and Svelte Kit, optimized speed and efficiency. Leveraged Postman for thorough API testing and integration for seamless data interchange. Ensured data accuracy and consistency in database management tasks with SQL Lite using Prisma.",
     side: "right"
@@ -147,6 +165,12 @@ const experience: Experience[] = [
 ];
 
 const projects = [
+  {
+    title: "Portfolio",
+    tech: "Next.js, TypeScript, Tailwind CSS",
+    desc: "Portfolio website built with Next.js, TypeScript, and Tailwind CSS.",
+    link: "https://github.com/Rafee104104/portfolio-app"
+  },
   { 
     title: "Photopia (Instagram Clone)", 
     tech: "SvelteKit, Prisma ORM, HTML5, Tailwind CSS", 
@@ -192,12 +216,20 @@ const research = [
   }
 ];
 
-const references = [
+const certificates = [
   {
-    name: "Shamsul Alam",
-    title: "Chief Executive Officer, DeshIT_BD",
-    contact: "info@deshit-bd.com | +8801537570379"
+    title: "Certificate - Summer Internship Program 2024",
+    description: "During the internship, the intern actively embraced new learning opportunities and effectively tackled assigned tasks, demonstrating exceptional full stack development skills while collaborating with their team members.",
+    link: "https://verify.netcredential.com/q6a4VAd2Ts"
   },
+  {
+    title: "LoR - Summer Internship Program 2024",
+    description: "This certifies the Full Stack Developer Intern demonstrated responsibility, sincerity, a willingness to learn, and enthusiasm for new challenges, consistently delivering their best.",
+    link: "https://verify.netcredential.com/q6a4djVmUW"
+  }
+];
+
+const references = [
   {
     name: "Dr. Kazi A. Kalpoma",
     title: "Professor, Ahsanullah University of Science and Technology",
@@ -207,6 +239,16 @@ const references = [
     name: "Dr. Enamul Haque",
     title: "Managing Director, Mercy General Hospital D.Lab & Consultation Centre",
     contact: "eh4700834@gmail.com | +8801331283123"
+  },
+  {
+    name: "Hannan Satopay",
+    title: "Chief Executive Officer, Meta Craftlab",
+    contact: "hannan@craftlab.ai | +919969297408"
+  },
+  {
+    name: "Shamsul Alam",
+    title: "Chief Executive Officer, DeshIT_BD",
+    contact: "info@deshit-bd.com | +8801537570379"
   }
 ];
 
@@ -224,6 +266,12 @@ const IconGitHub = (props: React.SVGProps<SVGSVGElement>) => (
 const IconLinkedIn = (props: React.SVGProps<SVGSVGElement>) => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" {...props}>
     <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+  </svg>
+);
+
+const IconYouTube = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" {...props}>
+    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.016 3.016 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.016 3.016 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.75 15.568V8.432L15.818 12 9.75 15.568z" />
   </svg>
 );
 
@@ -370,6 +418,14 @@ const HeroSection = () => {
             >
               <IconGitHub className="w-8 h-8" />
             </a>
+            <a
+              href={personalData.youtubeUrl}
+              target="_blank" rel="noopener noreferrer"
+              className="text-[var(--text-muted)] hover:text-red-500 transition-transform duration-300 hover:scale-125"
+              aria-label="YouTube Channel"
+            >
+              <IconYouTube className="w-9 h-9" />
+            </a>
             <a 
               href={`mailto:${personalData.email}`}
               className="text-[var(--text-muted)] hover:text-red-500 transition-transform duration-300 hover:scale-125"
@@ -390,6 +446,7 @@ const navLinks = [
   { name: "Projects", href: "#projects" },
   { name: "Experience", href: "#experience" },
   { name: "Research", href: "#research" },
+  { name: "Certificates", href: "#certificates" },
   { name: "Contact", href: "#contact" },
 ];
 
@@ -537,6 +594,14 @@ export default function App() {
             <p className="text-base sm:text-lg md:text-xl text-[var(--text-secondary)] leading-relaxed">
               {personalData.profileSummary}
             </p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
+              {personalDetails.map((detail) => (
+                <div key={detail.label} className={`${cardClasses} p-4 rounded-xl`}>
+                  <p className="text-sm font-semibold text-[var(--accent)]">{detail.label}</p>
+                  <p className="text-[var(--text-primary)]">{detail.value}</p>
+                </div>
+              ))}
+            </div>
             <div>
               <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-6">Personal Qualities</h3>
               <div className="flex flex-wrap justify-center gap-3">
@@ -546,6 +611,19 @@ export default function App() {
                     className="bg-[var(--chip-bg)] text-[var(--chip-text)] text-sm font-medium px-4 py-2 rounded-full shadow-sm"
                   >
                     {quality}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div>
+              <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-6">Languages</h3>
+              <div className="flex flex-wrap justify-center gap-3">
+                {languages.map((language) => (
+                  <span
+                    key={language}
+                    className="bg-[var(--chip-bg)] text-[var(--chip-text)] text-sm font-medium px-4 py-2 rounded-full shadow-sm"
+                  >
+                    {language}
                   </span>
                 ))}
               </div>
@@ -568,22 +646,26 @@ export default function App() {
         {/* Projects Section */}
         <Section id="projects" title="Projects">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {projects.map((proj) => (
-              <div key={proj.title} className={`${cardClasses} p-5 sm:p-6 rounded-2xl flex flex-col`}>
-                <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-primary)] mb-3">{proj.title}</h3>
-                <p className="text-[var(--accent)] text-sm mb-4 font-medium">{proj.tech}</p>
-                <p className="text-[var(--text-primary)] mb-6 flex-grow">{proj.desc}</p>
-                <a 
-                  href={proj.link}
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="mt-auto inline-flex items-center justify-center gap-2 px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-[var(--accent-contrast)] bg-[var(--accent)] hover:bg-[var(--accent-hover)] transition-all duration-300 transform hover:scale-105"
-                >
-                  <IconGitHub className="w-4 h-4" />
-                  View Code
-                </a>
-              </div>
-            ))}
+            {projects.map((proj) => {
+              const isGitHubProject = proj.link.includes("github.com");
+
+              return (
+                <div key={proj.title} className={`${cardClasses} p-5 sm:p-6 rounded-2xl flex flex-col`}>
+                  <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-primary)] mb-3">{proj.title}</h3>
+                  <p className="text-[var(--accent)] text-sm mb-4 font-medium">{proj.tech}</p>
+                  <p className="text-[var(--text-primary)] mb-6 flex-grow">{proj.desc}</p>
+                  <a
+                    href={proj.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-auto inline-flex items-center justify-center gap-2 px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-[var(--accent-contrast)] bg-[var(--accent)] hover:bg-[var(--accent-hover)] transition-all duration-300 transform hover:scale-105"
+                  >
+                    {isGitHubProject && <IconGitHub className="w-4 h-4" />}
+                    {proj.linkLabel ?? (isGitHubProject ? "View Code" : "View Project")}
+                  </a>
+                </div>
+              );
+            })}
           </div>
         </Section>
 
@@ -650,6 +732,26 @@ export default function App() {
           </div>
         </Section>
 
+        {/* Certificates Section */}
+        <Section id="certificates" title="Certificates">
+          <div className="max-w-3xl mx-auto grid md:grid-cols-2 gap-6 lg:gap-8">
+            {certificates.map((certificate) => (
+              <div key={certificate.title} className={`${cardClasses} p-5 sm:p-6 rounded-2xl flex flex-col`}>
+                <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-primary)] mb-3">{certificate.title}</h3>
+                <p className="text-[var(--text-primary)] mb-6 flex-grow">{certificate.description}</p>
+                <a
+                  href={certificate.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-auto inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-[var(--accent-contrast)] bg-[var(--accent)] hover:bg-[var(--accent-hover)] transition-all duration-300 transform hover:scale-105"
+                >
+                  Verify
+                </a>
+              </div>
+            ))}
+          </div>
+        </Section>
+
         {/* Contact & References Section */}
         <Section id="contact" title="Contact & References">
           <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-6 lg:gap-12">
@@ -677,6 +779,10 @@ export default function App() {
                 <p className="text-base sm:text-lg text-[var(--text-primary)]">
                   <span className="font-semibold text-[var(--accent)]">LinkedIn:</span>
                   <a href={personalData.linkedinUrl} target="_blank" rel="noopener noreferrer" className="hover:underline sm:ml-2">Tasnim Munawar Rafee</a>
+                </p>
+                <p className="text-base sm:text-lg text-[var(--text-primary)]">
+                  <span className="font-semibold text-[var(--accent)]">YouTube:</span>
+                  <a href={personalData.youtubeUrl} target="_blank" rel="noopener noreferrer" className="hover:underline sm:ml-2">Tasnim Munawar Rafee</a>
                 </p>
               </div>
             </div>
