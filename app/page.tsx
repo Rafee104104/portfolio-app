@@ -164,7 +164,15 @@ const experience: Experience[] = [
   }
 ];
 
-const projects = [
+type Project = {
+  title: string;
+  tech: string;
+  desc: string;
+  link: string;
+  linkLabel?: string;
+};
+
+const projects: Project[] = [
   {
     title: "Portfolio",
     tech: "Next.js, TypeScript, Tailwind CSS",
@@ -308,30 +316,52 @@ const IconClose = (props: React.SVGProps<SVGSVGElement>) => (
 
 // --- CUSTOM HOOK: useTypewriter ---
 
-const useTypewriter = (text: string, speed: number = 100) => {
+const useTypewriter = (text: string, speed: number = 100, pauseDuration: number = 1200, deleteSpeed: number = 50) => {
   const [displayText, setDisplayText] = useState('');
   const [isTyping, setIsTyping] = useState(true);
 
   useEffect(() => {
-    if (text) {
-      setIsTyping(true);
-      setDisplayText(''); // Reset on text change
-      let i = 0;
-      const timer = setInterval(() => {
-        if (i < text.length) {
-          setDisplayText(text.substring(0, i + 1));
-          i++;
-        } else {
-          clearInterval(timer);
-          setIsTyping(false);
-        }
-      }, speed);
-
-      return () => clearInterval(timer);
+    if (!text) {
+      return;
     }
-  }, [text, speed]);
 
-  return { displayText, isTyping };
+    let index = 0;
+    let direction: 'typing' | 'deleting' = 'typing';
+    let timeoutId: ReturnType<typeof setTimeout>;
+
+    const runTypewriter = () => {
+      setIsTyping(true);
+
+      if (direction === 'typing') {
+        if (index < text.length) {
+          index += 1;
+          setDisplayText(text.slice(0, index));
+          timeoutId = setTimeout(runTypewriter, speed);
+          return;
+        }
+
+        direction = 'deleting';
+        timeoutId = setTimeout(runTypewriter, pauseDuration);
+        return;
+      }
+
+      if (index > 0) {
+        index -= 1;
+        setDisplayText(text.slice(0, index));
+        timeoutId = setTimeout(runTypewriter, deleteSpeed);
+        return;
+      }
+
+      direction = 'typing';
+      timeoutId = setTimeout(runTypewriter, speed);
+    };
+
+    timeoutId = setTimeout(runTypewriter, speed);
+
+    return () => clearTimeout(timeoutId);
+  }, [text, speed, pauseDuration, deleteSpeed]);
+
+  return { displayText: text ? displayText : '', isTyping: text ? isTyping : false };
 };
 
 
@@ -342,12 +372,19 @@ const useScrollAnimation = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
+          const animationClass = entry.target.getAttribute('data-animation');
+
+          if (!animationClass) {
+            return;
+          }
+
           if (entry.isIntersecting) {
-            const animationClass = entry.target.getAttribute('data-animation');
-            if (animationClass) {
+            entry.target.classList.remove(animationClass);
+            requestAnimationFrame(() => {
               entry.target.classList.add(animationClass);
-            }
-            observer.unobserve(entry.target); // Animate only once
+            });
+          } else {
+            entry.target.classList.remove(animationClass);
           }
         });
       },
