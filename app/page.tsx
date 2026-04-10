@@ -746,8 +746,13 @@ export default function App() {
         {/* Education Section */}
         <Section id="education" title="Education">
           <div className="max-w-3xl mx-auto grid md:grid-cols-2 gap-6 lg:gap-8">
-            {education.map((edu) => (
-              <div key={edu.degree} className={`${cardClasses} p-5 sm:p-6 rounded-2xl text-center`}>
+            {education.map((edu, index) => (
+              <div
+                key={edu.degree}
+                className={`${cardClasses} p-5 sm:p-6 rounded-2xl text-center ${
+                  index === education.length - 1 ? "md:col-span-2 md:max-w-[calc(50%-0.75rem)] md:mx-auto md:w-full" : ""
+                }`}
+              >
                 <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-primary)]">{edu.degree}</h3>
                 <p className="text-lg text-[var(--accent)] font-semibold">{edu.institution}</p>
                 <p className="text-sm text-[var(--text-muted)] mb-2">{edu.years}</p>
