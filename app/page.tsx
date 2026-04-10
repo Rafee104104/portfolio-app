@@ -112,10 +112,10 @@ const education = [
 ];
 
 const skills = [
-  { category: "Programming Languages", list: "C, C++, Python, Java, Javascript" },
+  { category: "Programming Languages", list: "C, C++, Python, Java, Javascript, PHP" },
   { category: "Web Development", list: "HTML, CSS, PHP, Javascript, Svelte.js, Node.js" },
   { category: "Databases", list: "Oracle PL/SQL, MS SQL Server, SQL Lite" },
-  { category: "Frameworks", list: "iGraphics, ASP.Net MVC, Bootstrap" },
+  { category: "Frameworks", list: "iGraphics, ASP.Net MVC, Bootstrap, Laravel" },
   { category: "Version Control", list: "Git, Github, Github Desktop" },
   { category: "Tools", list: "Postman API, Slack, Jira, Prisma ORM" }, // Prisma ORM moved here per new CV
   { category: "Miscellaneous", list: "MS Office, MS Excel, Adobe Photoshop & Illustrator, LaTeX" },
