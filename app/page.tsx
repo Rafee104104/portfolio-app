@@ -587,7 +587,7 @@ export default function App() {
                 onClick={() => setStoredTheme(isDark ? "light" : "dark")}
                 className={controlButtonClasses}
                 aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
-                aria-pressed={isDark ? "true" : "false"}
+                aria-pressed={isDark}
               >
                 {isDark ? <IconSun className="h-5 w-5" /> : <IconMoon className="h-5 w-5" />}
               </button>
@@ -595,7 +595,7 @@ export default function App() {
                 type="button"
                 onClick={() => setIsMenuOpen((current) => !current)}
                 className={`${controlButtonClasses} lg:hidden`}
-                aria-expanded={isMenuOpen ? "true" : "false"}
+                aria-expanded={isMenuOpen}
                 aria-controls="mobile-menu"
                 aria-label="Toggle navigation menu"
               >
