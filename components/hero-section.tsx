@@ -22,7 +22,7 @@ const socialLinks = [
   { label: "Email", href: `mailto:${personalData.email}`, icon: faEnvelope },
 ];
 
-const stackPreview = ["Next.js", "Tailwind", "Node.js", "Express", "React", "MongoDB"];
+const stackPreview = ["HTML", "CSS", "PHP", "Laravel", "Svelte.js", "SQL"];
 
 export function HeroSection() {
   const { displayText, isTyping } = useTypewriter(personalData.roles);
@@ -34,7 +34,7 @@ export function HeroSection() {
         <div className="relative z-10 max-w-3xl animate-hero-copy">
           <p className="section-eyebrow inline-flex items-center gap-2">
             <FontAwesomeIcon icon={faWandMagicSparkles} className="h-4 w-4" />
-            Portfolio built with Next.js, Tailwind, and motion
+            Portfolio built with Next.js, Tailwind, and clean motion
           </p>
 
           <h1 className="mt-5 text-4xl font-black leading-[0.98] text-[var(--text-primary)] sm:text-6xl lg:text-7xl">
@@ -46,8 +46,8 @@ export function HeroSection() {
           </p>
 
           <p className="mt-6 max-w-2xl text-base leading-8 text-[var(--text-secondary)] sm:text-lg">
-            I build responsive web experiences, backend-ready workflows, and practical software systems with a focus
-            on clean implementation and fast iteration.
+            I build responsive web experiences, PHP-focused backend workflows, and practical software systems with a
+            focus on clean implementation and fast iteration.
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -87,7 +87,7 @@ export function HeroSection() {
           </div>
         </div>
 
-        <div className="relative z-10 animate-hero-visual">
+        <div className="relative z-10 mx-auto w-full max-w-[460px] animate-hero-visual">
           <div className="hero-portrait-shell">
             <Image
               src={personalData.imagePath}
@@ -97,13 +97,13 @@ export function HeroSection() {
               priority
               className="hero-portrait"
             />
-            <div className="hero-badge top-5 left-5">
-              <FontAwesomeIcon icon={faLocationDot} className="h-4 w-4" />
+            <div className="hero-badge hero-badge-location">
+              <FontAwesomeIcon icon={faLocationDot} className="h-3.5 w-3.5" />
               {personalData.location}
             </div>
-            <div className="hero-badge bottom-5 right-5">
-              <FontAwesomeIcon icon={faCode} className="h-4 w-4" />
-              MERN Ready
+            <div className="hero-badge hero-badge-stack">
+              <FontAwesomeIcon icon={faCode} className="h-3.5 w-3.5" />
+              PHP Laravel Ready
             </div>
           </div>
 
@@ -118,10 +118,10 @@ export function HeroSection() {
             </div>
             <pre className="font-mono text-sm leading-7 text-[var(--text-secondary)]">
               <code>{`const portfolio = {
-  frontend: "Next.js + Tailwind",
-  backend: "Node.js + Express",
-  database: "MongoDB-ready",
-  motion: "scroll reveals"
+  frontend: "HTML + CSS + Svelte.js",
+  backend: "PHP + Laravel",
+  database: "Oracle / SQL Server / SQLite",
+  tools: "Postman + Git"
 };`}</code>
             </pre>
             <div className="mt-4 flex flex-wrap gap-2">

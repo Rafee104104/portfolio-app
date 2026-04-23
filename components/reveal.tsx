@@ -13,7 +13,7 @@ type RevealProps = {
 
 export function Reveal({ children, className = "", delay = 0, variant = "up" }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [revealState, setRevealState] = useState<"visible" | "hidden" | "shown">("visible");
 
   useEffect(() => {
     const element = ref.current;
@@ -25,29 +25,47 @@ export function Reveal({ children, className = "", delay = 0, variant = "up" }: 
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (prefersReducedMotion || !("IntersectionObserver" in window)) {
-      const frameId = window.requestAnimationFrame(() => setIsVisible(true));
+      const frameId = window.requestAnimationFrame(() => setRevealState("shown"));
       return () => window.cancelAnimationFrame(frameId);
     }
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(entry.target);
-        }
-      },
-      { rootMargin: "0px 0px -12% 0px", threshold: 0.14 },
-    );
+    let observer: IntersectionObserver | null = null;
+    const frameId = window.requestAnimationFrame(() => {
+      const rect = element.getBoundingClientRect();
+      const isInView = rect.top < window.innerHeight * 0.92 && rect.bottom > 0;
 
-    observer.observe(element);
+      if (isInView) {
+        setRevealState("shown");
+        return;
+      }
 
-    return () => observer.disconnect();
+      setRevealState("hidden");
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setRevealState("shown");
+            observer?.unobserve(entry.target);
+          }
+        },
+        { rootMargin: "0px 0px -12% 0px", threshold: 0.14 },
+      );
+
+      observer.observe(element);
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+      observer?.disconnect();
+    };
   }, []);
+
+  const isArmed = revealState !== "visible";
+  const isVisible = revealState !== "hidden";
 
   return (
     <div
       ref={ref}
-      className={`reveal reveal-${variant} ${isVisible ? "is-visible" : ""} ${className}`}
+      className={`reveal ${isArmed ? "is-armed" : ""} reveal-${variant} ${isVisible ? "is-visible" : ""} ${className}`}
       style={{ "--reveal-delay": `${delay}ms` } as CSSProperties}
     >
       {children}

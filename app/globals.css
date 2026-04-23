@@ -220,19 +220,24 @@ a {
 
 .hero-portrait-shell {
   position: relative;
+  width: min(100%, 420px);
+  aspect-ratio: 1 / 1;
+  margin-inline: auto;
   overflow: hidden;
   border: 1px solid var(--border);
-  border-radius: 2rem;
+  border-radius: 50%;
   background: var(--surface);
-  box-shadow: 0 30px 80px rgb(17 24 39 / 0.16);
-  transform: rotate(1deg);
+  box-shadow: 0 24px 58px rgb(17 24 39 / 0.14);
+  transform: rotate(0.75deg);
 }
 
 .hero-portrait {
   display: block;
   width: 100%;
+  height: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
+  object-position: center top;
   filter: saturate(1.08) contrast(1.04);
   transform: scale(1.02);
 }
@@ -246,11 +251,27 @@ a {
   border: 1px solid var(--border);
   background: rgb(255 255 255 / 0.86);
   color: #111827;
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   font-weight: 900;
-  padding: 0.65rem 0.8rem;
-  box-shadow: 0 16px 35px rgb(17 24 39 / 0.14);
+  line-height: 1;
+  padding: 0.55rem 0.7rem;
+  white-space: nowrap;
+  box-shadow: 0 14px 28px rgb(17 24 39 / 0.13);
   backdrop-filter: blur(16px);
+}
+
+.hero-badge-location,
+.hero-badge-stack {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.hero-badge-location {
+  top: 1rem;
+}
+
+.hero-badge-stack {
+  bottom: 1rem;
 }
 
 .dark .hero-badge {
@@ -409,6 +430,11 @@ a.contact-row:hover {
 }
 
 .reveal {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal.is-armed {
   opacity: 0;
   transition:
     opacity 720ms ease,
@@ -417,19 +443,19 @@ a.contact-row:hover {
   will-change: opacity, transform;
 }
 
-.reveal-up {
+.reveal.is-armed.reveal-up {
   transform: translateY(34px);
 }
 
-.reveal-left {
+.reveal.is-armed.reveal-left {
   transform: translateX(-44px);
 }
 
-.reveal-right {
+.reveal.is-armed.reveal-right {
   transform: translateX(44px);
 }
 
-.reveal-scale {
+.reveal.is-armed.reveal-scale {
   transform: scale(0.94);
 }
 

@@ -20,7 +20,7 @@ const firaCode = Fira_Code({
 
 export const metadata: Metadata = {
   title: "Tasnim Munawar Rafee | Full Stack Portfolio",
-  description: "Animated MERN-ready portfolio built with Next.js, Tailwind CSS, HTML5, and Font Awesome.",
+  description: "Animated full stack portfolio built with Next.js, Tailwind CSS, HTML5, and Font Awesome.",
 };
 
 export default function RootLayout({

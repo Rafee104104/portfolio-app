@@ -49,7 +49,7 @@ export type ResearchItem = {
 export type CertificateItem = {
   title: string;
   description: string;
-  link: string;
+  link?: string;
 };
 
 export type ReferenceItem = {
@@ -65,7 +65,7 @@ export const personalData = {
     "Full Stack Software Engineer",
     "Backend Web Developer",
     "IT Support Executive",
-    "MERN Stack Portfolio Builder",
+    "PHP Laravel Developer",
   ],
   location: "Dhaka, Bangladesh",
   fullAddress: "358/1, Khandokar Road, Shyampur, Jurain, Dhaka 1204",
@@ -97,7 +97,7 @@ export const navLinks: NavLink[] = [
 
 export const heroStats: DetailItem[] = [
   { label: "Portfolio Projects", value: "7+" },
-  { label: "Primary Stack", value: "MERN" },
+  { label: "Primary Focus", value: "PHP Laravel" },
   { label: "Location", value: "Dhaka" },
 ];
 
@@ -133,37 +133,43 @@ export const skills: SkillGroup[] = [
     category: "Programming Languages",
     icon: "code",
     summary: "Core syntax, algorithms, scripting, and backend fundamentals.",
-    list: ["C", "C++", "Python", "Java", "JavaScript", "PHP"],
-  },
-  {
-    category: "Web Development",
-    icon: "react",
-    summary: "Responsive interfaces, API-connected pages, and modern app routes.",
-    list: ["HTML5", "CSS", "JavaScript", "Svelte.js", "Node.js", "PHP"],
-  },
-  {
-    category: "MERN & Backend",
-    icon: "server",
-    summary: "Server-side structure, database-driven features, and API testing.",
-    list: ["MongoDB-ready", "Express.js", "React", "Node.js", "Postman API"],
+    list: ["C", "C++", "Python", "Java", "Javascript", "PHP"],
   },
   {
     category: "Databases",
     icon: "database",
     summary: "Relational queries, schema work, and practical data handling.",
-    list: ["Oracle PL/SQL", "MS SQL Server", "SQL Lite", "Prisma ORM"],
+    list: ["Oracle PL/SQL", "MS SQL Server", "SQL Lite"],
   },
   {
     category: "Frameworks",
     icon: "layer",
     summary: "Framework-driven UI and server development workflows.",
-    list: ["Next.js", "Laravel", "ASP.Net MVC", "Bootstrap", "iGraphics"],
+    list: ["iGraphics", "ASP.Net MVC", "Bootstrap", "Laravel"],
+  },
+  {
+    category: "Web Development",
+    icon: "server",
+    summary: "Responsive pages, scripting, server-side PHP, and practical web workflows.",
+    list: ["HTML", "CSS", "PHP", "Javascript", "Svelte.js", "Node.js"],
+  },
+  {
+    category: "Version Control System",
+    icon: "gear",
+    summary: "Versioning and repository workflows for daily development.",
+    list: ["Git", "Github", "Github Desktop"],
+  },
+  {
+    category: "Miscellaneous",
+    icon: "gear",
+    summary: "Office, design, documentation, and productivity tools.",
+    list: ["MS Office", "MS Excel", "Adobe Photoshop & Illustrator", "LaTeX"],
   },
   {
     category: "Tools",
     icon: "gear",
-    summary: "Daily engineering tools for versioning, design, and delivery.",
-    list: ["Git", "GitHub", "GitHub Desktop", "Slack", "Jira", "MS Excel"],
+    summary: "Practical delivery tools for API testing, coordination, and data workflows.",
+    list: ["Postman API", "Slack", "Jira", "Prisma ORM"],
   },
 ];
 
@@ -264,6 +270,11 @@ export const research: ResearchItem[] = [
 ];
 
 export const certificates: CertificateItem[] = [
+  {
+    title: "Internship Completion Certificate",
+    description:
+      "This is to certify that he has successfully completed a three-month internship as a Backend Developer Intern (PHP / Laravel) at DeshIT-BD, demonstrating strong dedication, technical proficiency, and excellent performance in web application development using PHP and Laravel.",
+  },
   {
     title: "Certificate - Summer Internship Program 2024",
     description:

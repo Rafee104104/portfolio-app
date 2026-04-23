@@ -1,6 +1,6 @@
 import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGithub, faJs, faLaravel, faNodeJs, faPhp, faReact } from "@fortawesome/free-brands-svg-icons";
+import { faGithub, faJs, faLaravel, faNodeJs, faPhp } from "@fortawesome/free-brands-svg-icons";
 import { faCode, faDatabase, faGear, faLayerGroup, faServer } from "@fortawesome/free-solid-svg-icons";
 import { Reveal } from "@/components/reveal";
 import { SectionShell } from "@/components/section-shell";
@@ -8,7 +8,6 @@ import { skills } from "@/lib/portfolio-data";
 
 const skillIcons: Record<string, IconDefinition> = {
   code: faCode,
-  react: faReact,
   server: faServer,
   database: faDatabase,
   layer: faLayerGroup,
@@ -16,12 +15,12 @@ const skillIcons: Record<string, IconDefinition> = {
 };
 
 const marqueeItems = [
-  { label: "HTML5", icon: faCode },
-  { label: "JavaScript", icon: faJs },
-  { label: "React", icon: faReact },
-  { label: "Node.js", icon: faNodeJs },
+  { label: "HTML", icon: faCode },
+  { label: "CSS", icon: faCode },
+  { label: "Javascript", icon: faJs },
   { label: "PHP", icon: faPhp },
   { label: "Laravel", icon: faLaravel },
+  { label: "Node.js", icon: faNodeJs },
   { label: "GitHub", icon: faGithub },
 ];
 
@@ -29,9 +28,9 @@ export function SkillsSection() {
   return (
     <SectionShell
       id="skills"
-      eyebrow="Technical Stack"
-      title="MERN-friendly skills with PHP and Laravel depth."
-      subtitle="A balanced mix of frontend, backend, database, framework, and delivery tools."
+      eyebrow="Technical Skills"
+      title="Practical skills from programming to delivery."
+      subtitle="Programming languages, databases, frameworks, web development, version control, and daily tools."
     >
       <div className="skill-marquee" aria-label="Highlighted technologies">
         <div className="skill-marquee-track">
