@@ -12,10 +12,10 @@ export function ResearchSection() {
       title="Academic work and verified learning."
       subtitle="Research and certificate links are grouped together to keep this portfolio compact."
     >
-      <div className="mx-auto grid max-w-6xl items-stretch gap-5 md:grid-cols-2" id="certificates">
+      <div className="mx-auto grid max-w-6xl items-stretch gap-6 md:grid-cols-2 md:auto-rows-fr lg:gap-8" id="certificates">
         {research.map((publication, index) => (
-          <Reveal key={publication.title} delay={index * 90} className="h-full">
-            <article className="feature-panel flex h-full flex-col p-6 sm:p-8">
+          <Reveal key={publication.title} delay={index * 90} variant="scale" className="h-full">
+            <article className="feature-panel flex h-full min-h-[17rem] flex-col p-6 sm:p-8">
               <span className="icon-disc">
                 <FontAwesomeIcon icon={faFlask} className="h-5 w-5" />
               </span>
@@ -31,10 +31,10 @@ export function ResearchSection() {
           <Reveal
             key={certificate.title}
             delay={(research.length + index) * 90}
-            variant={index % 2 === 0 ? "up" : "right"}
+            variant="scale"
             className="h-full"
           >
-            <article className="motion-card flex h-full flex-col p-6 sm:p-7">
+            <article className="motion-card flex h-full min-h-[17rem] flex-col p-6 sm:p-7">
               <span className="icon-disc">
                 <FontAwesomeIcon icon={faCertificate} className="h-5 w-5" />
               </span>
