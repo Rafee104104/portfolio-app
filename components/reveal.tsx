@@ -13,7 +13,7 @@ type RevealProps = {
 
 export function Reveal({ children, className = "", delay = 0, variant = "up" }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [revealState, setRevealState] = useState<"visible" | "hidden" | "shown">("visible");
+  const [revealState, setRevealState] = useState<"visible" | "hidden" | "shown">("hidden");
 
   useEffect(() => {
     const element = ref.current;
@@ -29,32 +29,42 @@ export function Reveal({ children, className = "", delay = 0, variant = "up" }: 
       return () => window.cancelAnimationFrame(frameId);
     }
 
-    let observer: IntersectionObserver | null = null;
-    const frameId = window.requestAnimationFrame(() => {
-      const rect = element.getBoundingClientRect();
-      const isInView = rect.top < window.innerHeight * 0.92 && rect.bottom > 0;
+    let frameId = 0;
+    let nextFrameId = 0;
+    let wasIntersecting = false;
 
-      if (isInView) {
-        setRevealState("shown");
-        return;
-      }
-
+    const playReveal = () => {
+      window.cancelAnimationFrame(frameId);
+      window.cancelAnimationFrame(nextFrameId);
       setRevealState("hidden");
-      observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setRevealState("shown");
-            observer?.unobserve(entry.target);
-          }
-        },
-        { rootMargin: "0px 0px -12% 0px", threshold: 0.14 },
-      );
 
-      observer.observe(element);
-    });
+      frameId = window.requestAnimationFrame(() => {
+        nextFrameId = window.requestAnimationFrame(() => setRevealState("shown"));
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (!wasIntersecting) {
+            playReveal();
+          }
+
+          wasIntersecting = true;
+          return;
+        }
+
+        wasIntersecting = false;
+        setRevealState("hidden");
+      },
+      { rootMargin: "0px 0px -12% 0px", threshold: 0.14 },
+    );
+
+    observer.observe(element);
 
     return () => {
       window.cancelAnimationFrame(frameId);
+      window.cancelAnimationFrame(nextFrameId);
       observer?.disconnect();
     };
   }, []);

@@ -37,7 +37,7 @@ export type ProjectItem = {
   title: string;
   tech: string[];
   desc: string;
-  link: string;
+  link?: string;
   linkLabel?: string;
 };
 
@@ -60,10 +60,12 @@ export type ReferenceItem = {
 
 export const personalData = {
   name: "Tasnim Munawar Rafee",
-  title: "Full Stack Software Engineer",
+  title: "Full-Stack Software Engineer",
   roles: [
-    "Full Stack Software Engineer",
-    "Backend Web Developer",
+    "Full-Stack Software Engineer",
+    "Full Stack Developer and Software Support",
+    ".NET Core and C# Developer",
+    "Next.js and React.js Developer",
     "IT Support Executive",
     "PHP Laravel Developer",
   ],
@@ -96,8 +98,8 @@ export const navLinks: NavLink[] = [
 ];
 
 export const heroStats: DetailItem[] = [
-  { label: "Portfolio Projects", value: "7+" },
-  { label: "Primary Focus", value: "PHP Laravel" },
+  { label: "Portfolio Projects", value: "7" },
+  { label: "Primary Focus", value: "Full Stack + Support" },
   { label: "Location", value: "Dhaka" },
 ];
 
@@ -133,25 +135,25 @@ export const skills: SkillGroup[] = [
     category: "Programming Languages",
     icon: "code",
     summary: "Core syntax, algorithms, scripting, and backend fundamentals.",
-    list: ["C", "C++", "Python", "Java", "Javascript", "PHP"],
+    list: ["C", "C#", "C++", "Python", "Java", "Javascript", "PHP"],
   },
   {
     category: "Databases",
     icon: "database",
     summary: "Relational queries, schema work, and practical data handling.",
-    list: ["Oracle PL/SQL", "MS SQL Server", "SQL Lite"],
+    list: ["Oracle PL/SQL", "MS SQL Server", "SQL Lite", "MySQL"],
   },
   {
     category: "Frameworks",
     icon: "layer",
     summary: "Framework-driven UI and server development workflows.",
-    list: ["iGraphics", "ASP.Net MVC", "Bootstrap", "Laravel"],
+    list: ["iGraphics", "ASP .Net Core MVC", "Bootstrap", "Laravel", "Tailwind", "Svelte.js", "React.js", "Next.js", "Node.js"],
   },
   {
     category: "Web Development",
     icon: "server",
     summary: "Responsive pages, scripting, server-side PHP, and practical web workflows.",
-    list: ["HTML", "CSS", "PHP", "Javascript", "Svelte.js", "Node.js"],
+    list: ["HTML5", "CSS3"],
   },
   {
     category: "Version Control System",
@@ -169,7 +171,7 @@ export const skills: SkillGroup[] = [
     category: "Tools",
     icon: "gear",
     summary: "Practical delivery tools for API testing, coordination, and data workflows.",
-    list: ["Postman API", "Slack", "Jira", "Prisma ORM"],
+    list: ["Postman API", "Slack", "Prisma ORM", "Git", "Github", "Github Desktop"],
   },
 ];
 
@@ -189,13 +191,22 @@ export const languages = ["Bengali (Native)", "English"];
 
 export const experience: ExperienceItem[] = [
   {
+    title: "Full Stack Developer and Software Support",
+    company: "Beta Solution",
+    duration: "May 2026 - Present",
+    location: "Hazi Badsha Mia Rd, Signboard",
+    description:
+      "Build and support enterprise software solutions with .NET Core, Oracle Forms 6i, Oracle APEX, Oracle PL/SQL, and C#. Develop integrated modules and database-driven applications, extract machine data, import it into company databases using .NET Core and C#, and build company websites with Next.js, TypeScript, Tailwind CSS, Node.js, and React.js.",
+    side: "right",
+  },
+  {
     title: "Backend Software Engineer Intern",
     company: "Shamsul Alam",
-    duration: "January 2026 - Present",
+    duration: "January 2026 - April 2026",
     location: "House D, 36 Zakir Hossain Road, Dhaka 1205",
     description:
       "PHP Laravel Web Development Intern role from DeshIT_BD Company. Responsibilities include delivering PHP Laravel tasks on time with clean, efficient, and scalable code following best practices. Communicate regularly with the team, attend meetings punctually, and share progress or blockers. Collaborate with developers, managers, and QA, follow coding standards, and proactively improve performance, security, and overall system quality.",
-    side: "right",
+    side: "left",
   },
   {
     title: "IT Support Executive",
@@ -203,8 +214,8 @@ export const experience: ExperienceItem[] = [
     duration: "August 2024 - December 2025",
     location: "Dhaka, Bangladesh",
     description:
-      "Worked as an IT Support Executive on the hospital's third-party software application and hardware support. Communication with patient and others for proper management of the software support.",
-    side: "left",
+      "Worked on the hospital's third-party software application and hardware support, communicated with patients and staff for proper software support management, created the company website using Next.js, TypeScript and Tailwind CSS, deployed it on Netlify, managed the hospital Facebook page, and maintained the Google Maps location.",
+    side: "right",
   },
   {
     title: "Intern Full-Stack Developer",
@@ -213,52 +224,57 @@ export const experience: ExperienceItem[] = [
     location: "Mumbai, India",
     description:
       "Developed web applications using Svelte.js and Svelte Kit, optimized speed and efficiency. Leveraged Postman for thorough API testing and integration for seamless data interchange. Ensured data accuracy and consistency in database management tasks with SQL Lite using Prisma.",
-    side: "right",
+    side: "left",
   },
 ];
 
 export const projects: ProjectItem[] = [
   {
-    title: "Portfolio",
-    tech: ["Next.js", "TypeScript", "Tailwind CSS"],
-    desc: "Portfolio website built with a componentized Next.js route, animated sections, and responsive Tailwind UI.",
-    link: "https://github.com/Rafee104104/portfolio-app",
-  },
-  {
-    title: "Photopia",
-    tech: ["SvelteKit", "Prisma ORM", "HTML5", "Tailwind CSS"],
-    desc: "Instagram-inspired app where people can post pictures with filters and optional text captions.",
-    link: `https://github.com/${personalData.githubHandle}/Photopia`,
-  },
-  {
-    title: "Responsive Design Tester",
-    tech: ["Svelte.js", "SvelteKit", "HTML5", "Tailwind CSS"],
-    desc: "Tool for testing website responsiveness across practical device resolutions.",
-    link: "https://github.com/hannansatopay/devstar/tree/main/src/routes/(tools)/responsive-design-tester",
+    title: "The_Food",
+    tech: ["HTML", "CSS", "Bootstrap 4", "XAMPP Server"],
+    desc: "Online e-commerce food ordering website for browsing restaurants and managing order flows.",
+    link: "https://youtu.be/IV2lqj7Qt4A?si=xE6CgkPlw9s2bOOI",
+    linkLabel: "Watch Demo",
   },
   {
     title: "Quick_Notes",
     tech: ["Svelte.js", "IndexedDB", "Prisma ORM", "Tailwind CSS"],
     desc: "Daily note-taking app with offline-friendly storage and an eye-catchy interface.",
-    link: `https://github.com/${personalData.githubHandle}/Quick_Notes`,
+    link: "https://fs.blabigo.org/s/3hSTK293",
+    linkLabel: "View Demo",
   },
   {
-    title: "TICKETZY",
-    tech: ["SQL", "Java"],
-    desc: "Movie ticket management system for customer records, movie schedules, and seat allocation.",
-    link: "https://github.com/janakmallik/Movie-Ticket-Management-System",
+    title: "Photopia",
+    tech: ["SvelteKit", "Prisma ORM", "HTML5", "Tailwind CSS"],
+    desc: "Instagram-inspired app where people can post pictures with filters and optional text captions.",
+    link: "https://fs.blabigo.org/s/rHl1AhbB",
+    linkLabel: "View Demo",
   },
   {
-    title: "Run For Your Life",
-    tech: ["C++", "iGraphics Framework"],
-    desc: "Pacman-like game where the player can chase the ghost instead of only running away.",
-    link: `https://github.com/${personalData.githubHandle}/Run-For-Your-Life`,
+    title: "Responsive Design Tester",
+    tech: ["Svelte.js", "SvelteKit", "HTML5", "Tailwind CSS"],
+    desc: "Tool for testing website responsiveness across practical device resolutions.",
+    link: "https://fs.blabigo.org/s/htVX1PDU",
+    linkLabel: "View Demo",
   },
   {
-    title: "The_Food",
-    tech: ["HTML", "CSS", "Bootstrap 4", "XAMPP", "PHP"],
-    desc: "Online food ordering platform for browsing restaurants and managing order flows.",
-    link: `https://github.com/${personalData.githubHandle}/The_Food`,
+    title: "Portfolio-App",
+    tech: ["Next.js", "React.js", "Tailwind CSS", "TypeScript"],
+    desc: "Personal portfolio website with responsive sections, clean motion, and live deployment.",
+    link: personalData.portfolioUrl,
+    linkLabel: "Live Site",
+  },
+  {
+    title: "MercyGeneralHospital",
+    tech: ["Next.js", "React.js", "Tailwind CSS", "TypeScript"],
+    desc: "Hospital landing page with hospital details, contact information, and location information.",
+    link: "https://mercy-general-hospital.vercel.app",
+    linkLabel: "Live Site",
+  },
+  {
+    title: "Fingerprint_Data_Transporter",
+    tech: [".Net Core", "C#", "Forms", "Worker Service", "Oracle"],
+    desc: "Receives fingerprint data from ZKT fingerprint devices and exports it to an Oracle database through both command-line worker service and Windows Forms systems.",
   },
 ];
 
@@ -271,7 +287,7 @@ export const research: ResearchItem[] = [
 
 export const certificates: CertificateItem[] = [
   {
-    title: "Internship Completion Certificate",
+    title: "Internship Certificate",
     description:
       "This is to certify that he has successfully completed a three-month internship as a Backend Developer Intern (PHP / Laravel) at DeshIT-BD, demonstrating strong dedication, technical proficiency, and excellent performance in web application development using PHP and Laravel.",
   },
@@ -287,13 +303,28 @@ export const certificates: CertificateItem[] = [
       "This certifies the Full Stack Developer Intern demonstrated responsibility, sincerity, a willingness to learn, and enthusiasm for new challenges, consistently delivering their best.",
     link: "https://verify.netcredential.com/q6a4djVmUW",
   },
+  {
+    title: "Mastering Svelte Fundamentals",
+    description:
+      "This badge verifies completion of Mastering Svelte Fundamentals, part of the Summer Internship Program 2024, covering dynamic and responsive web applications using Svelte with Tailwind CSS.",
+  },
+  {
+    title: "Mastering SvelteKit Fundamentals",
+    description:
+      "This badge verifies completion of Mastering SvelteKit Fundamentals, part of the Summer Internship Program 2024, covering scalable full-stack applications using SvelteKit with database integration using Prisma.",
+  },
 ];
 
 export const references: ReferenceItem[] = [
   {
-    name: "Dr. Kazi A. Kalpoma",
-    title: "Professor, Ahsanullah University of Science and Technology",
-    contact: "kalpoma@aust.edu | +8801819127854",
+    name: "Md Asadullah",
+    title: "Managing Director, Beta Solution",
+    contact: "asadullah.db@gmail.com | 01839959080",
+  },
+  {
+    name: "Shamsul Alam",
+    title: "Chief Executive Officer, DeshIT_BD",
+    contact: "info@deshit-bd.com | +8801537570379",
   },
   {
     name: "Dr. Enamul Haque",
@@ -306,8 +337,8 @@ export const references: ReferenceItem[] = [
     contact: "hannan@craftlab.ai | +919969297408",
   },
   {
-    name: "Shamsul Alam",
-    title: "Chief Executive Officer, DeshIT_BD",
-    contact: "info@deshit-bd.com | +8801537570379",
+    name: "Dr. Kazi A. Kalpoma",
+    title: "Professor, Ahsanullah University of Science and Technology",
+    contact: "kalpoma@aust.edu | +8801819127854",
   },
 ];

@@ -22,7 +22,7 @@ const socialLinks = [
   { label: "Email", href: `mailto:${personalData.email}`, icon: faEnvelope },
 ];
 
-const stackPreview = ["HTML", "CSS", "PHP", "Laravel", "Svelte.js", "SQL"];
+const stackPreview = ["Next.js", "React.js", ".NET Core", "C#", "Oracle", "Laravel"];
 
 export function HeroSection() {
   const { displayText, isTyping } = useTypewriter(personalData.roles);
@@ -46,8 +46,8 @@ export function HeroSection() {
           </p>
 
           <p className="mt-6 max-w-2xl text-base leading-8 text-[var(--text-secondary)] sm:text-lg">
-            I build responsive web experiences, PHP-focused backend workflows, and practical software systems with a
-            focus on clean implementation and fast iteration.
+            I build full-stack web apps, software support workflows, database-driven modules, and device-to-database
+            integrations across Next.js, .NET Core, Oracle, and Laravel.
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -103,7 +103,7 @@ export function HeroSection() {
             </div>
             <div className="hero-badge hero-badge-stack">
               <FontAwesomeIcon icon={faCode} className="h-3.5 w-3.5" />
-              PHP Laravel Ready
+              .NET + Next.js Ready
             </div>
           </div>
 
@@ -118,10 +118,10 @@ export function HeroSection() {
             </div>
             <pre className="font-mono text-sm leading-7 text-[var(--text-secondary)]">
               <code>{`const portfolio = {
-  frontend: "HTML + CSS + Svelte.js",
-  backend: "PHP + Laravel",
-  database: "Oracle / SQL Server / SQLite",
-  tools: "Postman + Git"
+  frontend: "Next.js + React.js + Tailwind",
+  backend: ".NET Core + C# + Laravel",
+  database: "Oracle / MySQL / SQL Server",
+  tools: "Postman + Git + Prisma"
 };`}</code>
             </pre>
             <div className="mt-4 flex flex-wrap gap-2">

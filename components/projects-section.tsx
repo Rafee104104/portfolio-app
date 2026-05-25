@@ -11,11 +11,11 @@ export function ProjectsSection() {
       id="projects"
       eyebrow="Selected Work"
       title="Projects with practical product thinking."
-      subtitle="Each card links to real code or a project route and keeps the stack visible at a glance."
+      subtitle="Each card keeps the stack, demo, and live project context visible at a glance."
     >
       <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
         {projects.map((project, index) => {
-          const isGitHubProject = project.link.includes("github.com");
+          const isGitHubProject = project.link?.includes("github.com") ?? false;
 
           return (
             <Reveal key={project.title} delay={index * 70} className="h-full">
@@ -36,10 +36,12 @@ export function ProjectsSection() {
                   ))}
                 </div>
 
-                <a href={project.link} target="_blank" rel="noopener noreferrer" className="card-link mt-7">
-                  <FontAwesomeIcon icon={isGitHubProject ? faGithub : faArrowUpRightFromSquare} className="h-4 w-4" />
-                  {project.linkLabel ?? (isGitHubProject ? "View Code" : "View Project")}
-                </a>
+                {project.link ? (
+                  <a href={project.link} target="_blank" rel="noopener noreferrer" className="card-link mt-7">
+                    <FontAwesomeIcon icon={isGitHubProject ? faGithub : faArrowUpRightFromSquare} className="h-4 w-4" />
+                    {project.linkLabel ?? (isGitHubProject ? "View Code" : "View Project")}
+                  </a>
+                ) : null}
               </article>
             </Reveal>
           );

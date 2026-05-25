@@ -1,8 +1,2 @@
-⨯ Another next dev server is already running.
-
-- Local:        http://localhost:3000
-- PID:          25200
-- Dir:          I:\GitHub Desktop\portfolio-app
-- Log:          .next\dev\logs\next-development.log
-
-Run taskkill /PID 25200 /F to stop it.
+⚠ Slow filesystem detected. The benchmark took 2112ms. If E:\Github Projects\portfolio-app\.next/dev is a network drive, consider moving it to a local folder.
+See more: https://nextjs.org/docs/app/guides/local-development

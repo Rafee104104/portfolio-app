@@ -1,6 +1,6 @@
 import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGithub, faJs, faLaravel, faNodeJs, faPhp } from "@fortawesome/free-brands-svg-icons";
+import { faGithub, faJs, faLaravel, faNodeJs, faPhp, faReact } from "@fortawesome/free-brands-svg-icons";
 import { faCode, faDatabase, faGear, faLayerGroup, faServer } from "@fortawesome/free-solid-svg-icons";
 import { Reveal } from "@/components/reveal";
 import { SectionShell } from "@/components/section-shell";
@@ -18,8 +18,11 @@ const marqueeItems = [
   { label: "HTML", icon: faCode },
   { label: "CSS", icon: faCode },
   { label: "Javascript", icon: faJs },
+  { label: "C#", icon: faCode },
   { label: "PHP", icon: faPhp },
   { label: "Laravel", icon: faLaravel },
+  { label: "React.js", icon: faReact },
+  { label: "Next.js", icon: faCode },
   { label: "Node.js", icon: faNodeJs },
   { label: "GitHub", icon: faGithub },
 ];
