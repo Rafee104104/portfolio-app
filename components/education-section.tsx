@@ -12,14 +12,10 @@ export function EducationSection() {
       title="Academic foundation."
       subtitle="Formal study milestones from school through computer science and engineering."
     >
-      <div className="mx-auto grid max-w-4xl gap-5 md:grid-cols-2">
+      <div className="mx-auto grid max-w-6xl auto-rows-fr gap-5 md:grid-cols-3">
         {education.map((edu, index) => (
-          <Reveal
-            key={edu.degree}
-            delay={index * 90}
-            className={index === education.length - 1 ? "md:col-span-2 md:mx-auto md:w-[calc(50%-0.625rem)]" : ""}
-          >
-            <article className="motion-card p-6 text-center">
+          <Reveal key={edu.degree} delay={index * 90} className="h-full">
+            <article className="motion-card flex h-full min-h-[20rem] flex-col items-center justify-center p-6 text-center">
               <span className="icon-disc mx-auto">
                 <FontAwesomeIcon icon={faGraduationCap} className="h-5 w-5" />
               </span>

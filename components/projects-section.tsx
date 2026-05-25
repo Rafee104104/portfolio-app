@@ -15,7 +15,11 @@ export function ProjectsSection() {
     >
       <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
         {projects.map((project, index) => {
-          const isGitHubProject = project.link?.includes("github.com") ?? false;
+          const projectLinks = [
+            project.demoUrl ? { label: "View Demo", href: project.demoUrl, icon: faArrowUpRightFromSquare } : null,
+            project.liveUrl ? { label: "Live Site", href: project.liveUrl, icon: faArrowUpRightFromSquare } : null,
+            project.githubUrl ? { label: "GitHub", href: project.githubUrl, icon: faGithub } : null,
+          ].filter((link): link is { label: string; href: string; icon: typeof faGithub } => Boolean(link));
 
           return (
             <Reveal key={project.title} delay={index * 70} className="h-full">
@@ -36,11 +40,15 @@ export function ProjectsSection() {
                   ))}
                 </div>
 
-                {project.link ? (
-                  <a href={project.link} target="_blank" rel="noopener noreferrer" className="card-link mt-7">
-                    <FontAwesomeIcon icon={isGitHubProject ? faGithub : faArrowUpRightFromSquare} className="h-4 w-4" />
-                    {project.linkLabel ?? (isGitHubProject ? "View Code" : "View Project")}
-                  </a>
+                {projectLinks.length > 0 ? (
+                  <div className={`mt-7 grid gap-3 ${projectLinks.length > 1 ? "sm:grid-cols-2" : ""}`}>
+                    {projectLinks.map((link) => (
+                      <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer" className="card-link w-full">
+                        <FontAwesomeIcon icon={link.icon} className="h-4 w-4" />
+                        {link.label}
+                      </a>
+                    ))}
+                  </div>
                 ) : null}
               </article>
             </Reveal>

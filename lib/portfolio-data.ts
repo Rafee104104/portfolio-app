@@ -37,8 +37,9 @@ export type ProjectItem = {
   title: string;
   tech: string[];
   desc: string;
-  link?: string;
-  linkLabel?: string;
+  demoUrl?: string;
+  liveUrl?: string;
+  githubUrl?: string;
 };
 
 export type ResearchItem = {
@@ -233,48 +234,49 @@ export const projects: ProjectItem[] = [
     title: "The_Food",
     tech: ["HTML", "CSS", "Bootstrap 4", "XAMPP Server"],
     desc: "Online e-commerce food ordering website for browsing restaurants and managing order flows.",
-    link: "https://youtu.be/IV2lqj7Qt4A?si=xE6CgkPlw9s2bOOI",
-    linkLabel: "Watch Demo",
+    demoUrl: "https://youtu.be/IV2lqj7Qt4A?si=xE6CgkPlw9s2bOOI",
+    githubUrl: `https://github.com/${personalData.githubHandle}/The_Food`,
   },
   {
     title: "Quick_Notes",
     tech: ["Svelte.js", "IndexedDB", "Prisma ORM", "Tailwind CSS"],
     desc: "Daily note-taking app with offline-friendly storage and an eye-catchy interface.",
-    link: "https://fs.blabigo.org/s/3hSTK293",
-    linkLabel: "View Demo",
+    demoUrl: "https://fs.blabigo.org/s/3hSTK293",
+    githubUrl: `https://github.com/${personalData.githubHandle}/Quick_Notes`,
   },
   {
     title: "Photopia",
     tech: ["SvelteKit", "Prisma ORM", "HTML5", "Tailwind CSS"],
     desc: "Instagram-inspired app where people can post pictures with filters and optional text captions.",
-    link: "https://fs.blabigo.org/s/rHl1AhbB",
-    linkLabel: "View Demo",
+    demoUrl: "https://fs.blabigo.org/s/rHl1AhbB",
+    githubUrl: `https://github.com/${personalData.githubHandle}/Photopia`,
   },
   {
     title: "Responsive Design Tester",
     tech: ["Svelte.js", "SvelteKit", "HTML5", "Tailwind CSS"],
     desc: "Tool for testing website responsiveness across practical device resolutions.",
-    link: "https://fs.blabigo.org/s/htVX1PDU",
-    linkLabel: "View Demo",
+    demoUrl: "https://fs.blabigo.org/s/htVX1PDU",
+    githubUrl: `https://github.com/${personalData.githubHandle}/Responsive-Website-Tester`,
   },
   {
     title: "Portfolio-App",
     tech: ["Next.js", "React.js", "Tailwind CSS", "TypeScript"],
     desc: "Personal portfolio website with responsive sections, clean motion, and live deployment.",
-    link: personalData.portfolioUrl,
-    linkLabel: "Live Site",
+    liveUrl: personalData.portfolioUrl,
+    githubUrl: `https://github.com/${personalData.githubHandle}/portfolio-app`,
   },
   {
     title: "MercyGeneralHospital",
     tech: ["Next.js", "React.js", "Tailwind CSS", "TypeScript"],
     desc: "Hospital landing page with hospital details, contact information, and location information.",
-    link: "https://mercy-general-hospital.vercel.app",
-    linkLabel: "Live Site",
+    liveUrl: "https://mercy-general-hospital.vercel.app",
+    githubUrl: `https://github.com/${personalData.githubHandle}/MercyGeneralHospital`,
   },
   {
     title: "Fingerprint_Data_Transporter",
     tech: [".Net Core", "C#", "Forms", "Worker Service", "Oracle"],
     desc: "Receives fingerprint data from ZKT fingerprint devices and exports it to an Oracle database through both command-line worker service and Windows Forms systems.",
+    githubUrl: `https://github.com/${personalData.githubHandle}/FingerPrint__32Bit_Production_Complete`,
   },
 ];
 
