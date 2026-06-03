@@ -276,6 +276,7 @@ export const projects: ProjectItem[] = [
     title: "Fingerprint_Data_Transporter",
     tech: [".Net Core", "C#", "Forms", "Worker Service", "Oracle"],
     desc: "Receives fingerprint data from ZKT fingerprint devices and exports it to an Oracle database through both command-line worker service and Windows Forms systems.",
+    demoUrl: "https://youtu.be/0_pHG7Fchbo",
     githubUrl: `https://github.com/${personalData.githubHandle}/FingerPrint__32Bit_Production_Complete`,
   },
 ];
