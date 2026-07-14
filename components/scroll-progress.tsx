@@ -1,30 +1,47 @@
-"use client";
+"use client"
 
-import { useEffect, useState } from "react";
+import type { ComponentPropsWithoutRef } from "react"
+import { motion, useReducedMotion, useScroll, useSpring } from "motion/react"
 
-export function ScrollProgress() {
-  const [progress, setProgress] = useState(0);
+import { cn } from "@/lib/utils"
 
-  useEffect(() => {
-    const updateProgress = () => {
-      const scrollTop = window.scrollY;
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      setProgress(maxScroll <= 0 ? 0 : Math.min(100, (scrollTop / maxScroll) * 100));
-    };
+type ScrollProgressProps = Omit<ComponentPropsWithoutRef<"div">, "children"> & {
+  indicatorClassName?: string
+  position?: "top" | "bottom"
+}
 
-    updateProgress();
-    window.addEventListener("scroll", updateProgress, { passive: true });
-    window.addEventListener("resize", updateProgress);
-
-    return () => {
-      window.removeEventListener("scroll", updateProgress);
-      window.removeEventListener("resize", updateProgress);
-    };
-  }, []);
+function ScrollProgress({
+  className,
+  indicatorClassName,
+  position = "bottom",
+  ...props
+}: ScrollProgressProps) {
+  const shouldReduceMotion = useReducedMotion()
+  const { scrollYProgress } = useScroll()
+  const smoothProgress = useSpring(scrollYProgress, {
+    damping: 30,
+    mass: 0.2,
+    stiffness: 180,
+  })
+  const scaleX = shouldReduceMotion ? scrollYProgress : smoothProgress
 
   return (
-    <div className="absolute inset-x-0 bottom-0 h-0.5 bg-transparent">
-      <div className="h-full bg-[var(--accent)]" style={{ width: `${progress}%` }} />
+    <div
+      {...props}
+      aria-hidden="true"
+      data-slot="scroll-progress"
+      className={cn(
+        "pointer-events-none absolute inset-x-0 z-50 h-0.5 overflow-hidden bg-primary/10",
+        position === "top" ? "top-0" : "bottom-0",
+        className,
+      )}
+    >
+      <motion.div
+        className={cn("h-full origin-left bg-primary", indicatorClassName)}
+        style={{ scaleX }}
+      />
     </div>
-  );
+  )
 }
+
+export { ScrollProgress, type ScrollProgressProps }

@@ -1,46 +1,60 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBriefcase } from "@fortawesome/free-solid-svg-icons";
-import { Reveal } from "@/components/reveal";
-import { SectionShell } from "@/components/section-shell";
+import { Check } from "lucide-react";
+
+import { MotionReveal } from "@/components/motion-reveal";
+import { SectionHeading } from "@/components/section-heading";
 import { experience } from "@/lib/portfolio-data";
 
 export function ExperienceSection() {
   return (
-    <SectionShell
-      id="experience"
-      eyebrow="Experience"
-      title="Professional timeline with delivery context."
-      subtitle="Roles across backend development, IT support, full-stack practice, and team collaboration."
-    >
-      <div className="relative mx-auto max-w-5xl">
-        <div className="absolute left-4 top-0 h-full w-px bg-[var(--timeline)] md:left-1/2" aria-hidden="true" />
+    <section id="experience" className="section-shell border-b bg-background/75">
+      <div className="container-shell">
+        <SectionHeading
+          eyebrow="Experience"
+          title="A career shaped by delivery and support."
+          description="Hands-on roles across business software, backend delivery, healthcare IT, and product development."
+        />
 
-        <div className="grid gap-8">
-          {experience.map((job, index) => {
-            const isRightAligned = job.side === "right";
-
-            return (
-              <div key={job.title} className="relative pl-12 md:grid md:grid-cols-2 md:gap-10 md:pl-0">
-                <div className="absolute left-4 top-2 z-10 flex h-9 w-9 -translate-x-1/2 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface-strong)] text-[var(--accent)] shadow-lg md:left-1/2">
-                  <FontAwesomeIcon icon={faBriefcase} className="h-4 w-4" />
+        <ol className="relative mt-12 border-t" aria-label="Professional experience timeline">
+          {experience.map((entry, index) => (
+            <li key={`${entry.company}-${entry.period}`} className="border-b">
+              <MotionReveal
+                className="grid gap-6 py-8 md:grid-cols-[12rem_1fr] md:gap-10 lg:grid-cols-[15rem_1fr] lg:py-10"
+                delay={(index % 2) * 0.06}
+              >
+                <div>
+                  <p className="font-mono text-[0.7rem] font-semibold tracking-[0.08em] text-brand uppercase">
+                    {entry.period}
+                  </p>
+                  <p className="mt-2 text-sm text-muted-foreground">{entry.location}</p>
+                  <span className="mt-5 inline-flex size-8 items-center justify-center rounded-full border bg-card font-display text-sm italic text-gold">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
                 </div>
 
-                <div className={isRightAligned ? "md:col-start-2" : "md:col-start-1"}>
-                  <Reveal variant={isRightAligned ? "right" : "left"} delay={index * 110}>
-                    <article className="timeline-card p-6">
-                      <p className="text-sm font-bold uppercase tracking-[0.18em] text-[var(--accent)]">{job.duration}</p>
-                      <h3 className="mt-3 text-2xl font-black text-[var(--text-primary)]">{job.title}</h3>
-                      <p className="mt-2 text-lg font-bold text-[var(--text-secondary)]">{job.company}</p>
-                      <p className="mt-1 text-sm text-[var(--text-muted)]">{job.location}</p>
-                      <p className="mt-5 leading-7 text-[var(--text-secondary)]">{job.description}</p>
-                    </article>
-                  </Reveal>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+                <article className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-10">
+                  <div>
+                    <h3 className="font-display text-2xl font-bold tracking-[-0.025em] text-foreground sm:text-3xl">
+                      {entry.role}
+                    </h3>
+                    <p className="mt-2 text-base font-semibold text-brand">{entry.company}</p>
+                    <p className="mt-4 leading-7 text-muted-foreground">{entry.summary}</p>
+                  </div>
+                  <ul className="grid content-start gap-3">
+                    {entry.highlights.map((highlight) => (
+                      <li key={highlight} className="flex gap-3 leading-7 text-muted-foreground">
+                        <span className="mt-1.5 flex size-5 shrink-0 items-center justify-center rounded-full border border-brand/35 text-brand">
+                          <Check className="size-3" strokeWidth={2} aria-hidden="true" />
+                        </span>
+                        <span>{highlight}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              </MotionReveal>
+            </li>
+          ))}
+        </ol>
       </div>
-    </SectionShell>
+    </section>
   );
 }

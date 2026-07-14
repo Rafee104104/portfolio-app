@@ -1,30 +1,28 @@
-import { AboutSection } from "@/components/about-section";
 import { ContactSection } from "@/components/contact-section";
-import { EducationSection } from "@/components/education-section";
 import { ExperienceSection } from "@/components/experience-section";
+import { ExpertiseSection } from "@/components/expertise-section";
 import { HeroSection } from "@/components/hero-section";
-import { ProjectsSection } from "@/components/projects-section";
-import { ResearchSection } from "@/components/research-section";
+import { ProfileSection } from "@/components/profile-section";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { SiteShell } from "@/components/site-shell";
-import { SkillsSection } from "@/components/skills-section";
+import { WorkSection } from "@/components/work-section";
 
 export function PortfolioPage() {
   return (
-    <SiteShell>
+    <>
+      <a className="skip-link" href="#main-content">
+        Skip to content
+      </a>
       <SiteHeader />
-      <main>
+      <main id="main-content">
         <HeroSection />
-        <AboutSection />
-        <SkillsSection />
-        <ProjectsSection />
+        <WorkSection />
+        <ExpertiseSection />
         <ExperienceSection />
-        <EducationSection />
-        <ResearchSection />
+        <ProfileSection />
         <ContactSection />
       </main>
       <SiteFooter />
-    </SiteShell>
+    </>
   );
 }
