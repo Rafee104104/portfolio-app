@@ -2,7 +2,7 @@
 
 A formal, editorial-style portfolio for Tasnim Munawar Rafee, a full-stack software engineer based in Dhaka, Bangladesh. It presents selected projects, professional experience, technical strengths, education, and research in a focused single-page experience.
 
-Live site: [www.portfolio-app-lac-seven.vercel.app](https://www.portfolio-app-lac-seven.vercel.app)
+Live site: https://portfolio-app-lac-seven.vercel.app/
 
 ## Stack
 

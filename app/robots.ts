@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const canonicalOrigin = "https://www.rafeeportfolio.com";
+const canonicalOrigin = "https://portfolio-app-lac-seven.vercel.app/";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
     },
     sitemap: `${canonicalOrigin}/sitemap.xml`,
-    host: canonicalOrigin,
+    host: canonicalOrigin, 
   };
 }

@@ -8,7 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: canonicalOrigin,
       lastModified: new Date("2026-07-14"),
       changeFrequency: "monthly",
-      priority: 1,
+      priority: 1, 
     },
   ];
 }
